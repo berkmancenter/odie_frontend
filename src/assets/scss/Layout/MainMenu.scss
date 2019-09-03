@@ -1,0 +1,41 @@
+.main-menu {
+  .nav-item {
+    display: block;
+    font-size: 1.3rem;
+    width: 100%;
+    text-align: left;
+    text-transform: uppercase;
+    font-weight: bold;
+
+    &.nav-item-placeholder {
+      padding: 0.5rem 1rem;
+    }
+
+    a {
+      color: $almostBlack;
+    }
+
+    &.nav-item-active {
+      a {
+        border-left: 4px solid $almostBlack;
+        margin-left: -4px;
+      }
+    }
+
+    ul {
+      padding: 0;
+
+      a {
+        padding-left: 0;
+        font-weight: normal;
+        font-size: 1rem;
+      }
+
+      .nav-item-active {
+        a {
+          padding-left: 0.5rem;
+        }
+      }
+    }
+  }
+}

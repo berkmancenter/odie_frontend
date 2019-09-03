@@ -1,0 +1,8 @@
+export default {
+  api: {
+    url: 'http://localhost:7777'
+  },
+  hotjar: {
+    account_id: false
+  }
+}

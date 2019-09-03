@@ -1,0 +1,7 @@
+@mixin noselect() {
+  user-select: none;
+}
+
+.noselect {
+  @include noselect();
+}
