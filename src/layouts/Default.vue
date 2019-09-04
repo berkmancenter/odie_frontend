@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div class="container-fluid">
+    <div class="container-fluid header">
       <b-row class="header-logo">
-        <b-col cols="0" sm="2"></b-col>
-        <b-col cols="12" sm="8">
+        <b-col cols="10">
           <router-link :to="'/'" class="header-logo-link noselect">
-            ODIE
+            <img src="@/assets/images/logo_being.svg">
+            <span>Online Discourse Insight Explorer</span>
           </router-link>
         </b-col>
         <b-col cols="12" sm="2">
@@ -19,7 +19,7 @@
       </b-row>
     </div>
 
-    <div>
+    <div class="content">
       <transition name="fade">
         <router-view :key="$route.fullPath" />
       </transition>
