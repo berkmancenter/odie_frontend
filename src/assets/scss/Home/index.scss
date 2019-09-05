@@ -1,2 +1,14 @@
 .home-view {
+  .card {
+    margin-top: 15px;
+
+    .card-content {
+      padding: 1rem;
+    }
+  }
+
+  .home-view-card-show-all {
+    display: block;
+    margin-top: 10px;
+  }
 }

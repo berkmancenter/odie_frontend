@@ -1,13 +1,15 @@
+body, html {
+  font-family: $mainFontFamily;
+  margin: 0;
+}
+
 .header {
   height: 80px;
-  box-shadow: 0 5px 5px rgba(182, 182, 182, 0.75);
-  margin-bottom: 20px;
+  text-align: center;
+  background-color: #fafafa;
 
   .header-logo {
-    text-align: left;
-
     .header-logo-link {
-      color: $mainPalette1;
       display: inline-block;
       font-size: 2rem;
       text-transform: uppercase;
@@ -31,11 +33,12 @@
   }
 }
 
-footer {
-  text-align: center;
-  margin: 30px 0 10px 0;
-  box-shadow: 0 -5px 5px rgba(182, 182, 182, 0.75);
-  padding-top: 10px;
+.navbar.main-navbar {
+  background-color: $primary;
+
+  a {
+    color: #ffffff;
+  }
 }
 
 .fade-enter-active, .fade-leave-active {
@@ -52,7 +55,7 @@ footer {
 }
 
 #main-menu-toggler {
-  font-size: 36px;
+  font-size: 2rem;
   margin-top: 12px;
 }
 

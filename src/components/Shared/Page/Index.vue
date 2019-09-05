@@ -1,12 +1,12 @@
 <template>
   <div class="container">
-    <b-row>
-      <b-col class="page-view" cols="12">
+    <div>
+      <div class="page-view">
         <h1>{{ title }}</h1>
 
         <safe-html :value="content" />
-      </b-col>
-    </b-row>
+      </div>
+    </div>
   </div>
 </template>
 

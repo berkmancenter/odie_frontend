@@ -1,35 +1,60 @@
 <template>
   <div>
-    <div class="container-fluid header">
-      <b-row class="header-logo">
-        <b-col cols="10">
+    <div class="header">
+      <div class="header-logo">
+        <div>
           <router-link :to="'/'" class="header-logo-link noselect">
+            <span>OD</span>
             <img src="@/assets/images/logo_being.svg">
-            <span>Online Discourse Insight Explorer</span>
+            <span>IE</span>
           </router-link>
-        </b-col>
-        <b-col cols="12" sm="2">
-          <a id="main-menu-toggler" class="hvr-grow">
-            <i class="fa fa-bars" aria-hidden="true"></i>
-          </a>
-          <swit-menu button-id="main-menu-toggler">
-            <main-menu />
-          </swit-menu>
-        </b-col>
-      </b-row>
+        </div>
+      </div>
     </div>
 
-    <div class="content">
-      <transition name="fade">
-        <router-view :key="$route.fullPath" />
-      </transition>
+    <nav class="navbar main-navbar noselect" role="navigation" aria-label="main navigation">
+      <div class="container">
+        <div class="navbar-menu">
+          <div class="navbar-start">
+            <a class="navbar-item">
+              Home
+            </a>
 
-      <footer>
+            <a class="navbar-item">
+              Media Sources
+            </a>
+
+            <a class="navbar-item">
+              Media Sets
+            </a>
+
+            <a class="navbar-item">
+              About Us
+            </a>
+
+            <a class="navbar-item">
+              Contact
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <section class="section">
+      <div class="content">
+        <transition name="fade">
+          <router-view :key="$route.fullPath" />
+        </transition>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="content has-text-centered">
         <div>{{ new Date().getFullYear() }} @ Berkman Klein Center</div>
         <div>Built: {{ build_date }}</div>
         <div>Version: {{ build_version }}</div>
-      </footer>
-    </div>
+      </div>
+    </footer>
   </div>
 </template>
 

@@ -1,16 +1,56 @@
 <template>
   <div class="home-view">
     <div class="container">
-      <h3 class="text-center noselect">Select Media Source</h3>
+      <div class="columns">
+        <div class="column">
+          <h3 class="text-center noselect">Media Sources</h3>
 
-      <div class="home-view-media-source">CNN</div>
-      <div class="home-view-media-source">New York Times</div>
-      <div class="home-view-media-source">Wall Street Journal</div>
-      <div class="home-view-media-source">Houston Chronicle</div>
-      <div class="home-view-media-source">Washington Post</div>
-      <div class="home-view-media-source">Boston Globe</div>
-      <div class="home-view-media-source">Seattle Times</div>
-      <div class="home-view-media-source">Newsday</div>
+          <div class="card" v-for="source in ['New York Times', 'CNN', 'Wall Street Journal', 'Houston Chronicle', 'Washington Post']">
+            <div class="card-content has-text-weight-bold">
+              {{ source }} <span class="tag is-primary is-pulled-right">345 links</span>
+            </div>
+            <footer class="card-footer noselect">
+              <div class="card-footer-item">
+                <span>
+                  <a>View</a>
+                </span>
+              </div>
+              <div class="card-footer-item">
+                <span>
+                  <a>Share</a>
+                </span>
+              </div>
+            </footer>
+          </div>
+
+          <a class="button is-primary home-view-card-show-all">Show All</a>
+        </div>
+
+        <div class="column">
+          <h3 class="text-center noselect">Media Sets</h3>
+
+          <div class="card" v-for="source in ['New York Times + CNN', 'CNN + Wall Street Journal', 'CNN + Wall Street Journal', 'CNN + Wall Street Journal', 'CNN + Wall Street Journal']">
+            <div class="card-content has-text-weight-bold">
+              {{ source }}
+            </div>
+            <footer class="card-footer">
+              <div class="card-footer-item noselect">
+                <span>
+                  <a>View</a>
+                </span>
+              </div>
+              <div class="card-footer-item">
+                <span>
+                  <a>Share</a>
+                </span>
+              </div>
+            </footer>
+          </div>
+
+          <a class="button is-primary home-view-card-show-all">Show All</a>
+        </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>

@@ -1,36 +1,9 @@
-body, html {
-  font-family: $mainFontFamily;
+[v-cloak] {
+  display: none;
 }
 
 a {
-  color: #000000;
   cursor: pointer;
-}
-
-a:hover,
-a:active {
-  text-decoration: none;
-}
-
-.container-fluid {
-   padding: 0 5% !important;
-}
-
-.modal {
-  button {
-    cursor: pointer;
-  }
-}
-
-* {
-  &:active,
-  &:focus {
-    outline: none;
-  }
-}
-
-[v-cloak] {
-  display: none;
 }
 
 .almost-like-a-link {
@@ -53,24 +26,5 @@ a:active {
   a {
     color: #ffffff;
     text-decoration: underline;
-  }
-}
-
-button,
-.btn {
-  border-radius: 0;
-  font-size: 0.8rem;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
-.vue-slider-component {
-  .vue-slider-tooltip {
-    background-color: $strongBlue !important;
-    border: 1px solid $strongBlue !important;
-  }
-
-  .vue-slider-process {
-    background-color: $darkGrey !important;
   }
 }

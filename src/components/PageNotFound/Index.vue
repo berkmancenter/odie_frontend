@@ -1,7 +1,7 @@
 <template>
-  <b-col class="pagenotfound-view" cols="12">
+  <div class="pagenotfound-view">
     <p>Page not found.</p>
-  </b-col>
+  </div>
 </template>
 
 <script>

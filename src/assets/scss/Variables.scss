@@ -1,13 +1,31 @@
-// Colors
-$mainPalette1: #931F1D;
-$mainPalette2: #937B63;
-$mainPalette3: #8A9B68;
-$mainPalette4: #B6C197;
-$mainPalette5: #D5DDBC;
+@import "~bulma/sass/utilities/_all";
+// Bulma variables
+$primary: #890309;
+$primary-invert: findColorInvert($primary);
+$twitter: #4099FF;
+$twitter-invert: findColorInvert($twitter);
 
+// Setup $colors to use as bulma classes (e.g. 'is-twitter')
+$colors: (
+    "white": ($white, $black),
+    "black": ($black, $white),
+    "light": ($light, $light-invert),
+    "dark": ($dark, $dark-invert),
+    "primary": ($primary, $primary-invert),
+    "info": ($info, $info-invert),
+    "success": ($success, $success-invert),
+    "warning": ($warning, $warning-invert),
+    "danger": ($danger, $danger-invert),
+    "twitter": ($twitter, $twitter-invert)
+);
+
+// Links
+$link: $primary;
+$link-invert: $primary-invert;
+$link-focus-border: $primary;
+
+// Colors
 $almostBlack: #333333;
-$strongBlue: #79a7a8;
-$darkGrey: #999999;
 
 // Fonts
 $mainFontFamily: 'Roboto';
@@ -19,3 +37,7 @@ $breakpointSm: 576px;
 $breakpointMd: 768px;
 $breakpointLg: 992px;
 $breakpointXl: 1200px;
+
+// Import Bulma and Buefy styles
+@import "~bulma";
+@import "~buefy/src/scss/buefy";
