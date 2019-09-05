@@ -50,6 +50,7 @@
 
     <footer class="footer">
       <div class="content has-text-centered">
+        <img class="footer-logo" src="@/assets/images/logo_berkman.svg">
         <div>{{ new Date().getFullYear() }} @ Berkman Klein Center</div>
         <div>Built: {{ build_date }}</div>
         <div>Version: {{ build_version }}</div>

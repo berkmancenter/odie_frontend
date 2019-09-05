@@ -41,6 +41,13 @@ body, html {
   }
 }
 
+.footer {
+  .footer-logo {
+    height: 50px;
+
+  }
+}
+
 .fade-enter-active, .fade-leave-active {
   transition-property: opacity;
   transition-duration: .25s;
