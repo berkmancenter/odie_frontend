@@ -1,6 +1,8 @@
 export default {
   api: {
-    url: 'http://localhost:7777'
+    url: 'http://localhost:3000',
+    username: 'admin@example.com',
+    password: 'password'
   },
   hotjar: {
     account_id: false

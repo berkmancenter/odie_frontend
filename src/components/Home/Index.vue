@@ -7,7 +7,10 @@
 
           <div class="card" v-for="source in ['New York Times', 'CNN', 'Wall Street Journal', 'Houston Chronicle', 'Washington Post']">
             <div class="card-content has-text-weight-bold">
-              {{ source }} <span class="tag is-primary is-pulled-right">345 links</span>
+              {{ source }}
+              <span class="tag is-primary is-pulled-right">32 users</span>
+              <span class="tag is-primary is-pulled-right">211 retweets</span>
+              <span class="tag is-primary is-pulled-right">345 tweets</span>
             </div>
             <footer class="card-footer noselect">
               <div class="card-footer-item">
@@ -32,6 +35,9 @@
           <div class="card" v-for="source in ['New York Times + CNN', 'CNN + Wall Street Journal', 'CNN + Wall Street Journal', 'CNN + Wall Street Journal', 'CNN + Wall Street Journal']">
             <div class="card-content has-text-weight-bold">
               {{ source }}
+              <span class="tag is-primary is-pulled-right">32 users</span>
+              <span class="tag is-primary is-pulled-right">211 retweets</span>
+              <span class="tag is-primary is-pulled-right">345 tweets</span>
             </div>
             <footer class="card-footer">
               <div class="card-footer-item noselect">
