@@ -1,20 +1,13 @@
 <template>
-  <li class="nav-item" 
-      :class="{
-        'nav-item-active': activeItem && activeItem.slug == item.slug,
-        'nav-item-placeholder': item.placeholder,
-        'hvr-forward': !item.skipHoverAnimation
-      }"
+  <router-link
+    :class="{
+      'is-active': activeItem && activeItem.slug == item.slug
+    }"
+    class="navbar-item"
+    :to="'/' + item.slug"
   >
-    <router-link v-if="!item.placeholder" class="nav-link" :to="'/' + item.slug">
-      {{ item.title }}
-    </router-link>
-    <div v-if="item.placeholder">{{ item.title }}</div>
-
-    <ul v-if="item.children">
-      <main-menu-item :item="menuItem" :activeItem="activeItem" v-for="menuItem in item.children" :key="menuItem.title" />
-    </ul>
-  </li>
+    {{ item.title }}
+  </router-link>
 </template>
 
 <script>

@@ -14,29 +14,7 @@
 
     <nav class="navbar main-navbar noselect" role="navigation" aria-label="main navigation">
       <div class="container">
-        <div class="navbar-menu">
-          <div class="navbar-start">
-            <a class="navbar-item">
-              Home
-            </a>
-
-            <a class="navbar-item">
-              Media Sources
-            </a>
-
-            <a class="navbar-item">
-              Media Sets
-            </a>
-
-            <a class="navbar-item">
-              About Us
-            </a>
-
-            <a class="navbar-item">
-              Contact
-            </a>
-          </div>
-        </div>
+        <MainMenu />
       </div>
     </nav>
 

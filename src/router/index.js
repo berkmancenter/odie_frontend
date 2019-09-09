@@ -29,6 +29,43 @@ export default new Router({
           component: () => import('@/components/Home/Index')
         },
         {
+          path: '/media-sources',
+          name: 'media-sources.index',
+          meta: {
+            title: 'ODIE - Online Discourse Insight Explorer - Media Sources',
+            metaTags: [
+              {
+                name: 'description',
+                content: 'home description'
+              },
+              {
+                property: 'og:description',
+                content: 'home description'
+              }
+            ]
+          },
+          component: () => import('@/components/MediaSources/Index')
+        },
+        {
+          path: '/media-source/:media_source_id',
+          name: 'media-source.index',
+          meta: {
+            title: 'ODIE - Online Discourse Insight Explorer - Media Source',
+            metaTags: [
+              {
+                name: 'description',
+                content: 'home description'
+              },
+              {
+                property: 'og:description',
+                content: 'home description'
+              }
+            ]
+          },
+          props: true,
+          component: () => import('@/components/MediaSource/Index')
+        },
+        {
           path: '404',
           name: 'pagenotfound.index',
           meta: {

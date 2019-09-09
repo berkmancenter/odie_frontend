@@ -1,36 +1,45 @@
 <template>
   <div class="home-view">
     <div class="container">
-      <div class="columns">
-        <div class="column">
-          <h3 class="text-center noselect">Media Sources</h3>
+      <section class="hero is-light">
+        <div class="hero-body">
+          <div class="container">
+            <h2 class="subtitle has-text-centered">
+              Some description/slogan text about the site to let users immediately know what it is
+            </h2>
+          </div>
+        </div>
+      </section>
 
-          <div class="card" v-for="source in ['New York Times', 'CNN', 'Wall Street Journal', 'Houston Chronicle', 'Washington Post']">
+      <div class="columns">
+        <div class="column noselect">
+          <h3 class="text-center">Media Sources</h3>
+
+          <div class="card" v-for="source in $store.state.mediaSources.mediaSources.data">
             <div class="card-content has-text-weight-bold">
-              {{ source }}
-              <span class="tag is-primary is-pulled-right">32 users</span>
-              <span class="tag is-primary is-pulled-right">211 retweets</span>
-              <span class="tag is-primary is-pulled-right">345 tweets</span>
+              {{ source.attributes.name }}
+              <span class="tag is-primary is-pulled-right">{{ source.attributes.latest_data.data.attributes.num_users }} users</span>
+              <span class="tag is-primary is-pulled-right">{{ source.attributes.latest_data.data.attributes.num_retweets }} retweets</span>
+              <span class="tag is-primary is-pulled-right">{{ source.attributes.latest_data.data.attributes.num_tweets }} tweets</span>
             </div>
             <footer class="card-footer noselect">
               <div class="card-footer-item">
                 <span>
-                  <a>View</a>
-                </span>
-              </div>
-              <div class="card-footer-item">
-                <span>
-                  <a>Share</a>
+                  <router-link :to="'/media-source/' + source.id">
+                    View
+                  </router-link>
                 </span>
               </div>
             </footer>
           </div>
 
-          <a class="button is-primary home-view-card-show-all">Show All</a>
+          <router-link class="button is-primary home-view-card-show-all" :to="'/media-sources'">
+            List All
+          </router-link>
         </div>
 
-        <div class="column">
-          <h3 class="text-center noselect">Media Sets</h3>
+        <div class="column noselect">
+          <h3 class="text-center">Media Sets</h3>
 
           <div class="card" v-for="source in ['New York Times + CNN', 'CNN + Wall Street Journal', 'CNN + Wall Street Journal', 'CNN + Wall Street Journal', 'CNN + Wall Street Journal']">
             <div class="card-content has-text-weight-bold">
@@ -45,15 +54,10 @@
                   <a>View</a>
                 </span>
               </div>
-              <div class="card-footer-item">
-                <span>
-                  <a>Share</a>
-                </span>
-              </div>
             </footer>
           </div>
 
-          <a class="button is-primary home-view-card-show-all">Show All</a>
+          <a class="button is-primary home-view-card-show-all">List All</a>
         </div>
         </div>
       </div>
@@ -68,7 +72,9 @@
     data () {
       return {}
     },
-    created () {},
+    created () {
+      this.$store.dispatch('mediaSources/loadMediaSources')
+    },
     methods: {}
   }
 </script>

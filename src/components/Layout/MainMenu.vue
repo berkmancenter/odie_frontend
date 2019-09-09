@@ -1,7 +1,9 @@
 <template>
-  <b-nav id="main-menu" class="main-menu noselect">
-    <MainMenuItem :item="menuItem" :activeItem="activeItem" v-for="menuItem in menuItems" :key="menuItem.title" />
-  </b-nav>
+  <div class="navbar-menu">
+    <div class="navbar-start">
+      <MainMenuItem :item="menuItem" :activeItem="activeItem" v-for="menuItem in menuItems" :key="menuItem.title" />
+    </div>
+  </div>
 </template>
 
 <script>
@@ -11,6 +13,22 @@
     {
       title: 'Home',
       slug: ''
+    },
+    {
+      title: 'Media Sources',
+      slug: 'media-sources'
+    },
+    {
+      title: 'Media Sets',
+      slug: 'media-sets'
+    },
+    {
+      title: 'About Us',
+      slug: 'about-us'
+    },
+    {
+      title: 'Contact',
+      slug: 'contact'
     }
   ]
 
