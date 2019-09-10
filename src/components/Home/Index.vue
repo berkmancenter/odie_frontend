@@ -18,9 +18,11 @@
           <div class="card" v-for="source in $store.state.mediaSources.mediaSources.data">
             <div class="card-content has-text-weight-bold">
               {{ source.attributes.name }}
-              <span class="tag is-primary is-pulled-right">{{ source.attributes.latest_data.data.attributes.num_users }} users</span>
-              <span class="tag is-primary is-pulled-right">{{ source.attributes.latest_data.data.attributes.num_retweets }} retweets</span>
-              <span class="tag is-primary is-pulled-right">{{ source.attributes.latest_data.data.attributes.num_tweets }} tweets</span>
+              <div class="tags is-pulled-right">
+                <span class="tag is-primary">{{ source.attributes.latest_data.data.attributes.num_users }} users</span>
+                <span class="tag is-primary">{{ source.attributes.latest_data.data.attributes.num_retweets }} retweets</span>
+                <span class="tag is-primary">{{ source.attributes.latest_data.data.attributes.num_tweets }} tweets</span>
+              </div>
             </div>
             <footer class="card-footer noselect">
               <div class="card-footer-item">
@@ -38,7 +40,7 @@
           </router-link>
         </div>
 
-        <div class="column noselect">
+        <div class="column noselect" style="opacity: 0.5; pointer-events: none;">
           <h3 class="text-center">Media Sets</h3>
 
           <div class="card" v-for="source in ['New York Times + CNN', 'CNN + Wall Street Journal', 'CNN + Wall Street Journal', 'CNN + Wall Street Journal', 'CNN + Wall Street Journal']">

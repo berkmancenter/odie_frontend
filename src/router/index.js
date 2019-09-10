@@ -66,6 +66,25 @@ export default new Router({
           component: () => import('@/components/MediaSource/Index')
         },
         {
+          path: '/builder',
+          name: 'builder.index',
+          meta: {
+            title: 'ODIE - Online Discourse Insight Explorer - Builder',
+            metaTags: [
+              {
+                name: 'description',
+                content: 'home description'
+              },
+              {
+                property: 'og:description',
+                content: 'home description'
+              }
+            ]
+          },
+          props: true,
+          component: () => import('@/components/Builder/Index')
+        },
+        {
           path: '404',
           name: 'pagenotfound.index',
           meta: {

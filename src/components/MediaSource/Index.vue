@@ -2,7 +2,7 @@
   <div class="media-source-view" v-if="$store.state.mediaSources.activeMediaSource">
     <div class="container">
       <h1>{{ $store.state.mediaSources.activeMediaSource.data.attributes.name }}
-        <span class="is-size-6"><span class="has-text-weight-bold"></span> <a :href="$store.state.mediaSources.activeMediaSource.data.attributes.url" target="_blank">{{ $store.state.mediaSources.activeMediaSource.data.attributes.url }}</a></span>
+        <span class="is-size-6"><span class="has-text-weight-bold"></span> <a :href="'http://' + $store.state.mediaSources.activeMediaSource.data.attributes.url" target="_blank">{{ $store.state.mediaSources.activeMediaSource.data.attributes.url }}</a></span>
       </h1>
 
       <nav class="level">

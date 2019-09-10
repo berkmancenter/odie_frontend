@@ -15,6 +15,10 @@
       slug: ''
     },
     {
+      title: 'Builder',
+      slug: 'builder'
+    },
+    {
       title: 'Media Sources',
       slug: 'media-sources'
     },
