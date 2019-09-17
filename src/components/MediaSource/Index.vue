@@ -1,6 +1,6 @@
 <template>
   <div class="media-source-view" v-if="$store.state.mediaSources.activeMediaSource">
-    <div class="container">
+    <div class="container noselect">
       <h1>{{ $store.state.mediaSources.activeMediaSource.data.attributes.name }}
         <span class="is-size-6"><span class="has-text-weight-bold"></span> <a :href="'http://' + $store.state.mediaSources.activeMediaSource.data.attributes.url" target="_blank">{{ $store.state.mediaSources.activeMediaSource.data.attributes.url }}</a></span>
       </h1>
@@ -30,7 +30,7 @@
         <div class="card-content has-text-weight-bold">
           Top Hashtags
         </div>
-        <footer class="card-footer noselect">
+        <footer class="card-footer">
           <div class="card-footer-item tags">
             <span class="tag is-primary is-pulled-right" v-for="(count, tag) in sortedTags()">{{ tag }} <span>{{ count }}</span></span>
           </div>
