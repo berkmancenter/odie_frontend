@@ -28,3 +28,15 @@ a {
     text-decoration: underline;
   }
 }
+
+.content ul.multiselect__content {
+  margin: 0;
+}
+
+.multiselect__option--selected.multiselect__option--highlight {
+  background: $primary;
+
+  &::after {
+    background: $primary;
+  }
+}
