@@ -15,7 +15,7 @@
       slug: ''
     },
     {
-      title: 'Builder',
+      title: 'Media Set Builder',
       slug: 'builder'
     },
     {

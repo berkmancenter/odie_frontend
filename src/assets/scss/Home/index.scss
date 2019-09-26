@@ -4,9 +4,15 @@
 
     .card-content {
       padding: 1rem;
+      text-align: center;
 
       span {
         margin-left: 5px;
+      }
+
+      .tags {
+        margin-top: 10px;
+        justify-content:center;
       }
     }
   }

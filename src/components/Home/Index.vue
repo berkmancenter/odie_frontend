@@ -18,7 +18,7 @@
           <div class="card" v-for="source in $store.state.mediaSources.mediaSources.data">
             <div class="card-content has-text-weight-bold">
               {{ source.attributes.name }}
-              <div class="tags is-pulled-right">
+              <div class="tags">
                 <span class="tag is-primary">{{ source.attributes.latest_data.data.attributes.num_users }} users</span>
                 <span class="tag is-primary">{{ source.attributes.latest_data.data.attributes.num_retweets }} retweets</span>
                 <span class="tag is-primary">{{ source.attributes.latest_data.data.attributes.num_tweets }} tweets</span>
