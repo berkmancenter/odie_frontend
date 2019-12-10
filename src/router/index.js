@@ -104,6 +104,63 @@ export default new Router({
           component: () => import('@/components/MediaSet/Index')
         },
         {
+          path: '/media-sets',
+          name: 'media-sets.index',
+          meta: {
+            title: 'ODIE - Online Discourse Insight Explorer - Media Sets',
+            metaTags: [
+              {
+                name: 'description',
+                content: 'home description'
+              },
+              {
+                property: 'og:description',
+                content: 'home description'
+              }
+            ]
+          },
+          props: true,
+          component: () => import('@/components/MediaSets/Index')
+        },
+        {
+          path: '/about-us',
+          name: 'about-us.index',
+          meta: {
+            title: 'ODIE - Online Discourse Insight Explorer - About Us',
+            metaTags: [
+              {
+                name: 'description',
+                content: 'home description'
+              },
+              {
+                property: 'og:description',
+                content: 'home description'
+              }
+            ]
+          },
+          props: true,
+          component: () => import('@/components/AboutUs/Index')
+        },
+        {
+          path: '/contact',
+          name: 'contact.index',
+          meta: {
+            title: 'ODIE - Online Discourse Insight Explorer - Countac Us',
+            metaTags: [
+              {
+                name: 'description',
+                content: 'home description'
+              },
+              {
+                property: 'og:description',
+                content: 'home description'
+              }
+            ]
+          },
+          props: true,
+          component: () => import('@/components/Contact/Index')
+        },
+        {
           path: '404',
           name: 'pagenotfound.index',
           meta: {

@@ -26,16 +26,104 @@
         </div>
       </nav>
 
-      <div class="card">
-        <div class="card-content has-text-weight-bold">
-          Top Hashtags
-        </div>
-        <footer class="card-footer">
-          <div class="card-footer-item tags">
-            <span class="tag is-primary is-pulled-right" v-for="(count, tag) in sortedTags()">{{ tag }} <span>{{ count }}</span></span>
+      <div class="columns">
+        <div class="column">
+          <div class="card">
+            <div class="card-content has-text-weight-bold">
+              Top Hashtags
+              <b-tooltip label="Some info about this set" animated>
+                <i class="fa fa-info-circle" aria-hidden="true"></i>
+              </b-tooltip>
+            </div>
+            <footer class="card-footer">
+              <div class="card-footer-item tags">
+                <span class="tag is-primary is-pulled-right" v-for="(count, tag) in sortedSomething($store.state.mediaSources.activeMediaSource.data.attributes.latest_data.data.attributes.hashtags)"><a :href="'https://twitter.com/hashtag/' + tag" target="_blank"><span class="tag-title">#{{ tag }}</span></a> <span class="tag-value">{{ count }}</span></span>
+              </div>
+            </footer>
           </div>
-        </footer>
+        </div>
+        <div class="column">
+          <div class="card">
+            <div class="card-content has-text-weight-bold">
+              Top Sources
+              <b-tooltip label="Some info about this set" animated>
+                <i class="fa fa-info-circle" aria-hidden="true"></i>
+              </b-tooltip>
+            </div>
+            <footer class="card-footer">
+              <div class="card-footer-item tags">
+                <span class="tag is-primary is-pulled-right" v-for="(count, source) in sortedSomething($store.state.mediaSources.activeMediaSource.data.attributes.latest_data.data.attributes.top_sources)"><span class="tag-title">{{ source }}</span> <span class="tag-value">{{ count }}</span></span>
+              </div>
+            </footer>
+          </div>
+        </div>
       </div>
+
+      <div class="columns">
+        <div class="column">
+          <div class="card">
+            <div class="card-content has-text-weight-bold">
+              Top Retweets
+              <b-tooltip label="Some info about this set" animated>
+                <i class="fa fa-info-circle" aria-hidden="true"></i>
+              </b-tooltip>
+            </div>
+            <footer class="card-footer">
+              <div class="card-footer-item tags">
+                <span class="tag is-primary is-pulled-right" v-for="(count, tag) in sortedSomething($store.state.mediaSources.activeMediaSource.data.attributes.latest_data.data.attributes.top_retweets)"><span class="tag-title">{{ tag }}</span> <span class="tag-value">{{ count }}</span></span>
+              </div>
+            </footer>
+          </div>
+        </div>
+        <div class="column">
+          <div class="card">
+            <div class="card-content has-text-weight-bold">
+              Top Mentions
+              <b-tooltip label="Some info about this set" animated>
+                <i class="fa fa-info-circle" aria-hidden="true"></i>
+              </b-tooltip>
+            </div>
+            <footer class="card-footer">
+              <div class="card-footer-item tags">
+                <span class="tag is-primary is-pulled-right" v-for="(count, source) in sortedSomething($store.state.mediaSources.activeMediaSource.data.attributes.latest_data.data.attributes.top_mentions)"><span class="tag-title">@{{ source }}</span> <span class="tag-value">{{ count }}</span></span>
+              </div>
+            </footer>
+          </div>
+        </div>
+      </div>
+
+      <div class="columns">
+        <div class="column">
+          <div class="card">
+            <div class="card-content has-text-weight-bold">
+              Top Urls
+              <b-tooltip label="Some info about this set" animated>
+                <i class="fa fa-info-circle" aria-hidden="true"></i>
+              </b-tooltip>
+            </div>
+            <footer class="card-footer">
+              <div class="card-footer-item tags">
+                <span class="tag is-primary is-pulled-right" v-for="(count, tag) in sortedSomething($store.state.mediaSources.activeMediaSource.data.attributes.latest_data.data.attributes.top_urls)"><span class="tag-title">{{ tag }}</span> <span class="tag-value">{{ count }}</span></span>
+              </div>
+            </footer>
+          </div>
+        </div>
+        <div class="column">
+          <div class="card">
+            <div class="card-content has-text-weight-bold">
+              Top Words
+              <b-tooltip label="Some info about this set" animated>
+                <i class="fa fa-info-circle" aria-hidden="true"></i>
+              </b-tooltip>
+            </div>
+            <footer class="card-footer">
+              <div class="card-footer-item tags">
+                <span class="tag is-primary is-pulled-right" v-for="(count, source) in sortedSomething($store.state.mediaSources.activeMediaSource.data.attributes.latest_data.data.attributes.top_words)"><span class="tag-title">{{ source }}</span> <span class="tag-value">{{ count }}</span></span>
+              </div>
+            </footer>
+          </div>
+        </div>
+      </div> 
     </div>
   </div>
 </template>
@@ -54,11 +142,16 @@
       this.$store.dispatch('mediaSources/loadMediaSource', this.$props.media_source_id)
     },
     methods: {
-      sortedTags () {
+      sortedSomething (what, howMany = 10) {
         let asInt = {}
 
-        _.forEach(this.$store.state.mediaSources.activeMediaSource.data.attributes.latest_data.data.attributes.hashtags, (count, tag) => {
-          asInt[tag] = parseInt(count)
+        let limitedObjects = Object.keys(what).slice(0, howMany - 1).reduce((result, key) => {
+          result[key] = what[key]
+          return result
+        }, {})
+
+        _.forEach(limitedObjects, (count, item) => {
+          asInt[item] = parseInt(count)
         })
 
         return _(asInt)

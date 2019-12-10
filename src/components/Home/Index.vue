@@ -25,13 +25,13 @@
               </div>
             </div>
             <footer class="card-footer noselect">
-              <div class="card-footer-item">
-                <span>
-                  <router-link :to="'/media-source/' + source.id">
+              <router-link :to="'/media-source/' + source.id">
+                <div class="card-footer-item">
+                  <span>
                     View
-                  </router-link>
-                </span>
-              </div>
+                  </span>
+                </div>
+              </router-link>
             </footer>
           </div>
 

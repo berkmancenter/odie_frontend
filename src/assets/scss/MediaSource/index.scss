@@ -1,6 +1,19 @@
 .media-source-view {
+  .card-content {
+    padding: 1rem;
+  }
+
+  .b-tooltip {
+    margin-left: 2px;
+  }
+
   .tag {
-    span {
+    .tag-title {
+      max-width: 150px;
+      overflow: hidden;
+    }
+
+    .tag-value {
       background-color: #ffffff;
       color: $primary;
       padding: 0 4px;
