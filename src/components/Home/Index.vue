@@ -17,11 +17,11 @@
 
           <div class="card" v-for="source in $store.state.mediaSources.mediaSources.data">
             <div class="card-content has-text-weight-bold">
-              {{ source.attributes.name }}
+              <h4>{{ source.attributes.name }}</h4>
               <div class="tags">
-                <span class="tag is-primary">{{ source.attributes.latest_data.data.attributes.num_users }} users</span>
-                <span class="tag is-primary">{{ source.attributes.latest_data.data.attributes.num_retweets }} retweets</span>
-                <span class="tag is-primary">{{ source.attributes.latest_data.data.attributes.num_tweets }} tweets</span>
+                <span class="tag is-primary"><span class="tag-title">{{ source.attributes.latest_data.data.attributes.num_users }}</span> <span class="tag-value">users</span></span>
+                <span class="tag is-primary"><span class="tag-title">{{ source.attributes.latest_data.data.attributes.num_retweets }}</span> <span class="tag-value">retweets</span></span>
+                <span class="tag is-primary"><span class="tag-title">{{ source.attributes.latest_data.data.attributes.num_tweets }}</span> <span class="tag-value">tweets</span></span>
               </div>
             </div>
             <footer class="card-footer noselect">

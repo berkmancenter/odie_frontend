@@ -37,7 +37,14 @@
             </div>
             <footer class="card-footer">
               <div class="card-footer-item tags">
-                <span class="tag is-primary is-pulled-right" v-for="(count, tag) in sortedSomething($store.state.mediaSources.activeMediaSource.data.attributes.latest_data.data.attributes.hashtags)"><a :href="'https://twitter.com/hashtag/' + tag" target="_blank"><span class="tag-title">#{{ tag }}</span></a> <span class="tag-value">{{ count }}</span></span>
+                <span class="tag is-primary is-pulled-right" 
+                      v-for="(count, item) in sortedSomething($store.state.mediaSources.activeMediaSource.data.attributes.latest_data.data.attributes.hashtags)"
+                >
+                  <a :href="'https://twitter.com/hashtag/' + item" target="_blank">
+                    <span class="tag-title">#{{ item }}</span>
+                  </a>
+                  <span class="tag-value">{{ count }}</span>
+                </span>
               </div>
             </footer>
           </div>
@@ -52,7 +59,14 @@
             </div>
             <footer class="card-footer">
               <div class="card-footer-item tags">
-                <span class="tag is-primary is-pulled-right" v-for="(count, source) in sortedSomething($store.state.mediaSources.activeMediaSource.data.attributes.latest_data.data.attributes.top_sources)"><span class="tag-title">{{ source }}</span> <span class="tag-value">{{ count }}</span></span>
+                <span class="tag is-primary is-pulled-right" 
+                      v-for="(count, item) in sortedSomething($store.state.mediaSources.activeMediaSource.data.attributes.latest_data.data.attributes.top_sources)"
+                >
+                  <a :href="'https://' + item" target="_blank">
+                    <span class="tag-title">{{ item }}</span>
+                  </a>
+                  <span class="tag-value">{{ count }}</span>
+                </span>
               </div>
             </footer>
           </div>
@@ -85,7 +99,14 @@
             </div>
             <footer class="card-footer">
               <div class="card-footer-item tags">
-                <span class="tag is-primary is-pulled-right" v-for="(count, source) in sortedSomething($store.state.mediaSources.activeMediaSource.data.attributes.latest_data.data.attributes.top_mentions)"><span class="tag-title">@{{ source }}</span> <span class="tag-value">{{ count }}</span></span>
+                <span class="tag is-primary is-pulled-right" 
+                      v-for="(count, item) in sortedSomething($store.state.mediaSources.activeMediaSource.data.attributes.latest_data.data.attributes.top_mentions)"
+                >
+                  <a :href="'https://twitter.com/' + item" target="_blank">
+                    <span class="tag-title">@{{ item }}</span>
+                  </a>
+                  <span class="tag-value">{{ count }}</span>
+                </span>
               </div>
             </footer>
           </div>
@@ -103,7 +124,14 @@
             </div>
             <footer class="card-footer">
               <div class="card-footer-item tags">
-                <span class="tag is-primary is-pulled-right" v-for="(count, tag) in sortedSomething($store.state.mediaSources.activeMediaSource.data.attributes.latest_data.data.attributes.top_urls)"><span class="tag-title">{{ tag }}</span> <span class="tag-value">{{ count }}</span></span>
+                <span class="tag is-primary is-pulled-right" 
+                      v-for="(count, item) in sortedSomething($store.state.mediaSources.activeMediaSource.data.attributes.latest_data.data.attributes.top_urls)"
+                >
+                  <a :href="item" target="_blank">
+                    <span class="tag-title">{{ item }}</span>
+                  </a>
+                  <span class="tag-value">{{ count }}</span>
+                </span>
               </div>
             </footer>
           </div>

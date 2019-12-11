@@ -4,6 +4,10 @@
 
 a {
   cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .almost-like-a-link {
@@ -41,9 +45,32 @@ a {
   }
 }
 
-.tag {
-  a {
+.tag.is-primary {
+  background-color: #ffffff !important;
+  color: #000000;
+  border: 1px solid #d3d3d3;
+  height: auto;
+  padding: 3px 5px;
+
+  a,
+  span {
+    color: #000000;
+    font-size: 0.9rem;
+  }
+
+  .tag-value {
     color: #ffffff;
+    background-color: #000000;
+    font-weight: bold;
+    padding: 0 4px;
+    margin-left: 6px;
+    border-radius: 2px;
+  }
+
+  .tag-title {
+    max-width: 150px;
+    overflow: hidden;
+    display: block;
   }
 }
 
