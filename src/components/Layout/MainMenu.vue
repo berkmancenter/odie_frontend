@@ -23,10 +23,6 @@
       slug: 'media-sources'
     },
     {
-      title: 'Media Sets',
-      slug: 'media-sets'
-    },
-    {
       title: 'About Us',
       slug: 'about-us'
     },

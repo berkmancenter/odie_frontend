@@ -19,9 +19,9 @@
                 {{ source.attributes.name }}
               </router-link>
             </td>
-            <td>{{ source.attributes.latest_data.data.attributes.num_users }}</td>
-            <td>{{ source.attributes.latest_data.data.attributes.num_retweets }}</td>
             <td>{{ source.attributes.latest_data.data.attributes.num_tweets }}</td>
+            <td>{{ source.attributes.latest_data.data.attributes.num_retweets }}</td>
+            <td>{{ source.attributes.latest_data.data.attributes.num_users }}</td>
           </tr>
         </tbody>
       </table>
