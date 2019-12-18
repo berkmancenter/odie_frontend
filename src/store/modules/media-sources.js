@@ -5,6 +5,7 @@ let mediaSourcesProxy = new MediaSourcesProxy()
 // initial state
 const state = {
   mediaSources: [],
+  aggregatedMediaSource: [],
   activeMediaSource: false
 }
 
@@ -20,6 +21,15 @@ const actions = {
         context.commit('setMediaSources', response)
       })
   },
+  loadAggregatedMediaSource (context, ids) {
+    mediaSourcesProxy
+      .aggregated({
+        ids: ids
+      })
+      .then((response) => {
+        context.commit('setAggregaedMediaSource', response)
+      })
+  },
   loadMediaSource (context, id) {
     mediaSourcesProxy
       .find(id)
@@ -33,6 +43,9 @@ const actions = {
 const mutations = {
   setMediaSources (state, mediaSources) {
     state.mediaSources = mediaSources
+  },
+  setAggregaedMediaSource (state, mediaSource) {
+    state.aggregatedMediaSource = mediaSource
   },
   setActiveMediaSource (state, mediaSource) {
     state.activeMediaSource = mediaSource

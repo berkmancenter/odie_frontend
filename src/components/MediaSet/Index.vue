@@ -3,27 +3,49 @@
     <div class="container noselect">
       <h1>{{ mediaSetName }}</h1>
 
-      <div class="card">
-        <div class="card-content has-text-weight-bold">
-          Media Sources
-        </div>
-        <footer class="card-footer">
-          <div class="card-footer-item tags">
-            <span class="tag is-primary" v-for="mediaSource in mediaSources()">{{ mediaSource.attributes.name }}</span>
-          </div>
-        </footer>
+      <div class="media-set-view-social">
+        <vue-goodshare></vue-goodshare>
       </div>
+
+      <div class="card">
+        <header class="card-header">
+          <p class="card-header-title">
+            Media Sources
+          </p>
+        </header>
+        <div class="card-content">
+          <div class="content">
+            <div class="buttons">
+              <b-button
+                tag="router-link"
+                :to="'/media-source/' + mediaSource.id"
+                v-for="mediaSource in mediaSources()"
+                v-bind:key="mediaSource.id"
+              >
+                {{ mediaSource.attributes.name }}
+              </b-button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <MediaSourceData v-if="$store.state.mediaSources.aggregatedMediaSource.aggregate_data" :data="$store.state.mediaSources.aggregatedMediaSource.aggregate_data"></MediaSourceData>
     </div>
   </div>
 </template>
 
 <script>
   import _ from 'lodash'
+  import MediaSourceData from '../MediaSource/MediaSourceData'
+  import VueGoodshare from 'vue-goodshare'
 
   export default {
     name: 'media-set-index',
     props: [],
-    components: {},
+    components: {
+      MediaSourceData,
+      VueGoodshare
+    },
     data () {
       return {
         mediaSetName: this.$route.query.name
@@ -31,6 +53,7 @@
     },
     created () {
       this.$store.dispatch('mediaSources/loadMediaSources')
+      this.$store.dispatch('mediaSources/loadAggregatedMediaSource', this.$route.query.mediaSets.split(','))
     },
     methods: {
       mediaSources () {

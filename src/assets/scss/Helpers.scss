@@ -77,3 +77,15 @@ a {
 .b-tooltip {
   cursor: pointer;
 }
+
+.section .card-content {
+  padding: 1rem;
+}
+
+.button-social {
+  &.googleplus__design__flat,
+  &.pinterest__design__flat,
+  &.tumblr__design__flat {
+    display: none !important;
+  }
+}
