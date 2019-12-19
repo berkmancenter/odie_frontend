@@ -1,6 +1,19 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+// @TODO Just a temporary solution, we don't want to preload it, but the pace.js
+// loader lib doesn't seem to like the async router loader...
+import Layout from '@/layouts/Default'
+import Home from '@/components/Home/Index'
+import MediaSources from '@/components/MediaSources/Index'
+import MediaSource from '@/components/MediaSource/Index'
+import Builder from '@/components/Builder/Index'
+import MediaSet from '@/components/MediaSet/Index'
+import MediaSets from '@/components/MediaSets/Index'
+import AboutUs from '@/components/AboutUs/Index'
+import Contact from '@/components/Contact/Index'
+import PageNotFound from '@/components/PageNotFound/Index'
+
 Vue.use(Router)
 
 export default new Router({
@@ -8,7 +21,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      component: () => import('@/layouts/Default'),
+      component: Layout,
       children: [
         {
           path: '/',
@@ -26,7 +39,7 @@ export default new Router({
               }
             ]
           },
-          component: () => import('@/components/Home/Index')
+          component: Home
         },
         {
           path: '/media-sources',
@@ -44,7 +57,7 @@ export default new Router({
               }
             ]
           },
-          component: () => import('@/components/MediaSources/Index')
+          component: MediaSources
         },
         {
           path: '/media-source/:media_source_id',
@@ -63,7 +76,7 @@ export default new Router({
             ]
           },
           props: true,
-          component: () => import('@/components/MediaSource/Index')
+          component: MediaSource
         },
         {
           path: '/builder',
@@ -82,7 +95,7 @@ export default new Router({
             ]
           },
           props: true,
-          component: () => import('@/components/Builder/Index')
+          component: Builder
         },
         {
           path: '/media-set',
@@ -101,7 +114,7 @@ export default new Router({
             ]
           },
           props: true,
-          component: () => import('@/components/MediaSet/Index')
+          component: MediaSet
         },
         {
           path: '/media-sets',
@@ -120,7 +133,7 @@ export default new Router({
             ]
           },
           props: true,
-          component: () => import('@/components/MediaSets/Index')
+          component: MediaSets
         },
         {
           path: '/about-us',
@@ -139,7 +152,7 @@ export default new Router({
             ]
           },
           props: true,
-          component: () => import('@/components/AboutUs/Index')
+          component: AboutUs
         },
         {
           path: '/contact',
@@ -158,7 +171,7 @@ export default new Router({
             ]
           },
           props: true,
-          component: () => import('@/components/Contact/Index')
+          component: Contact
         },
         {
           path: '404',
@@ -176,7 +189,7 @@ export default new Router({
               }
             ]
           },
-          component: () => import('@/components/PageNotFound/Index')
+          component: PageNotFound
         },
         {
           path: '*',
