@@ -21,8 +21,8 @@
       </div>
     </nav>
 
-    <div class="columns">
-      <div class="column">
+    <div class="media-source-data-cards">
+      <div class="media-source-data-card-container">
         <MediaSourceDataCard label="Top Hashtags" dataKey="hashtags" :data="data.hashtags">
           <div slot-scope="slotProps">
             <a :href="'https://twitter.com/hashtag/' + slotProps.item" 
@@ -37,7 +37,7 @@
         </MediaSourceDataCard>
       </div>
 
-      <div class="column">
+      <div class="media-source-data-card-container">
         <MediaSourceDataCard label="Top Sources" dataKey="top_sources" :data="data.top_sources">
           <div slot-scope="slotProps">
             <a :href="'https://' + slotProps.item"
@@ -51,10 +51,8 @@
           </div>
         </MediaSourceDataCard>
       </div>
-    </div>
 
-    <div class="columns">
-      <div class="column">
+      <div class="media-source-data-card-container">
         <MediaSourceDataCard label="Top Retweets" dataKey="top_retweets" :data="data.top_retweets">
           <div slot-scope="slotProps">
             <div class="media-source-data-item-title">{{ slotProps.item }}</div>
@@ -63,7 +61,7 @@
         </MediaSourceDataCard>
       </div>
 
-      <div class="column">
+      <div class="media-source-data-card-container">
         <MediaSourceDataCard label="Top Mentions" dataKey="top_mentions" :data="data.top_mentions">
           <div slot-scope="slotProps">
             <a :href="'https://twitter.com/' + slotProps.item"
@@ -77,10 +75,8 @@
           </div>
         </MediaSourceDataCard>
       </div>
-    </div>
 
-    <div class="columns">
-      <div class="column">
+      <div class="media-source-data-card-container">
         <MediaSourceDataCard label="Top Urls" dataKey="top_urls" :data="data.top_urls">
           <div slot-scope="slotProps">
             <a :href="slotProps.item"
@@ -95,7 +91,7 @@
         </MediaSourceDataCard>
       </div>
 
-      <div class="column">
+      <div class="media-source-data-card-container">
         <MediaSourceDataCard label="Top Words" dataKey="top_words" :data="data.top_words">
           <div slot-scope="slotProps">
             <a :href="'https://twitter.com/search?q=' + slotProps.item"

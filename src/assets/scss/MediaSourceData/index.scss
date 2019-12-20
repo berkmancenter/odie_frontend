@@ -14,6 +14,22 @@
     padding: 0;
   }
 
+  .media-source-data-cards {
+    column-count: 2;
+    column-gap: 2rem;
+
+    @media only screen and (max-width: 768px) {
+      column-count: 1;
+    }
+
+    .media-source-data-card-container {
+      transform: translateX(0);
+      display: inline-block;
+      width: 100%;
+      margin-bottom: 2rem;
+    }
+  }
+
   .media-source-data-item {
     box-shadow: 0 1px 2px rgba(10, 10, 10, 0.1);
 
