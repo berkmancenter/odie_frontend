@@ -23,140 +23,91 @@
 
     <div class="columns">
       <div class="column">
-        <div class="card">
-          <div class="card-content has-text-weight-bold">
-            Top Hashtags
-            <b-tooltip label="Some info about this set" animated>
-              <i class="fa fa-info-circle" aria-hidden="true"></i>
-            </b-tooltip>
+        <MediaSourceDataCard label="Top Hashtags" dataKey="hashtags" :data="data.hashtags">
+          <div slot-scope="slotProps">
+            <a :href="'https://twitter.com/hashtag/' + slotProps.item" 
+               target="_blank"
+               :title="'#' + slotProps.item"
+               class="media-source-data-item-title"
+            >
+              #{{ slotProps.item }}
+            </a>
+            <span class="media-source-data-item-value">{{ slotProps.count }}</span>
           </div>
-          <footer class="card-footer">
-            <div class="card-footer-item tags">
-              <span class="tag is-primary is-pulled-right" 
-                    v-for="(count, item) in sortedSomething(data.hashtags)"
-              >
-                <a :href="'https://twitter.com/hashtag/' + item" 
-                   target="_blank"
-                   :title="'#' + item"
-                >
-                  <span class="tag-title">#{{ item }}</span>
-                </a>
-                <span class="tag-value">{{ count }}</span>
-              </span>
-            </div>
-          </footer>
-        </div>
+        </MediaSourceDataCard>
       </div>
+
       <div class="column">
-        <div class="card">
-          <div class="card-content has-text-weight-bold">
-            Top Sources
-            <b-tooltip label="Some info about this set" animated>
-              <i class="fa fa-info-circle" aria-hidden="true"></i>
-            </b-tooltip>
+        <MediaSourceDataCard label="Top Sources" dataKey="top_sources" :data="data.top_sources">
+          <div slot-scope="slotProps">
+            <a :href="'https://' + slotProps.item"
+               target="_blank"
+               :title="slotProps.item"
+               class="media-source-data-item-title"
+            >
+              {{ slotProps.item }}
+            </a>
+            <span class="media-source-data-item-value">{{ slotProps.count }}</span>
           </div>
-          <footer class="card-footer">
-            <div class="card-footer-item tags">
-              <span class="tag is-primary is-pulled-right" 
-                    v-for="(count, item) in sortedSomething(data.top_sources)"
-                    :title="item"
-              >
-                <a :href="'https://' + item" target="_blank">
-                  <span class="tag-title">{{ item }}</span>
-                </a>
-                <span class="tag-value">{{ count }}</span>
-              </span>
-            </div>
-          </footer>
-        </div>
+        </MediaSourceDataCard>
       </div>
     </div>
 
     <div class="columns">
       <div class="column">
-        <div class="card">
-          <div class="card-content has-text-weight-bold">
-            Top Retweets
-            <b-tooltip label="Some info about this set" animated>
-              <i class="fa fa-info-circle" aria-hidden="true"></i>
-            </b-tooltip>
+        <MediaSourceDataCard label="Top Retweets" dataKey="top_retweets" :data="data.top_retweets">
+          <div slot-scope="slotProps">
+            <div class="media-source-data-item-title">{{ slotProps.item }}</div>
+            <span class="media-source-data-item-value">{{ slotProps.count }}</span>
           </div>
-          <footer class="card-footer">
-            <div class="card-footer-item tags">
-              <span class="tag is-primary is-pulled-right" v-for="(count, tag) in sortedSomething(data.top_retweets)" :title="tag"><span class="tag-title">{{ tag }}</span> <span class="tag-value">{{ count }}</span></span>
-            </div>
-          </footer>
-        </div>
+        </MediaSourceDataCard>
       </div>
+
       <div class="column">
-        <div class="card">
-          <div class="card-content has-text-weight-bold">
-            Top Mentions
-            <b-tooltip label="Some info about this set" animated>
-              <i class="fa fa-info-circle" aria-hidden="true"></i>
-            </b-tooltip>
+        <MediaSourceDataCard label="Top Mentions" dataKey="top_mentions" :data="data.top_mentions">
+          <div slot-scope="slotProps">
+            <a :href="'https://twitter.com/' + slotProps.item"
+               target="_blank"
+               :title="slotProps.item"
+               class="media-source-data-item-title"
+            >
+              @{{ slotProps.item }}
+            </a>
+            <span class="media-source-data-item-value">{{ slotProps.count }}</span>
           </div>
-          <footer class="card-footer">
-            <div class="card-footer-item tags">
-              <span class="tag is-primary is-pulled-right" 
-                    v-for="(count, item) in sortedSomething(data.top_mentions)"
-              >
-                <a :href="'https://twitter.com/' + item" 
-                   target="_blank"
-                   :title="'@' + item">
-                  <span class="tag-title">@{{ item }}</span>
-                </a>
-                <span class="tag-value">{{ count }}</span>
-              </span>
-            </div>
-          </footer>
-        </div>
+        </MediaSourceDataCard>
       </div>
     </div>
 
     <div class="columns">
       <div class="column">
-        <div class="card">
-          <div class="card-content has-text-weight-bold">
-            Top Urls
-            <b-tooltip label="Some info about this set" animated>
-              <i class="fa fa-info-circle" aria-hidden="true"></i>
-            </b-tooltip>
+        <MediaSourceDataCard label="Top Urls" dataKey="top_urls" :data="data.top_urls">
+          <div slot-scope="slotProps">
+            <a :href="slotProps.item"
+               target="_blank"
+               :title="slotProps.item"
+               class="media-source-data-item-title"
+            >
+              {{ slotProps.item }}
+            </a>
+            <span class="media-source-data-item-value">{{ slotProps.count }}</span>
           </div>
-          <footer class="card-footer">
-            <div class="card-footer-item tags">
-              <span class="tag is-primary is-pulled-right" 
-                    v-for="(count, item) in sortedSomething(data.top_urls)"
-                    :title="item"
-              >
-                <a :href="item" target="_blank">
-                  <span class="tag-title">{{ item }}</span>
-                </a>
-                <span class="tag-value">{{ count }}</span>
-              </span>
-            </div>
-          </footer>
-        </div>
+        </MediaSourceDataCard>
       </div>
+
       <div class="column">
-        <div class="card">
-          <div class="card-content has-text-weight-bold">
-            Top Words
-            <b-tooltip label="Some info about this set" animated>
-              <i class="fa fa-info-circle" aria-hidden="true"></i>
-            </b-tooltip>
+        <MediaSourceDataCard label="Top Words" dataKey="top_words" :data="data.top_words">
+          <div slot-scope="slotProps">
+            <a :href="'https://twitter.com/search?q=' + slotProps.item"
+               target="_blank"
+               :title="slotProps.item"
+               class="media-source-data-item-title"
+            >
+              {{ slotProps.item }}
+            </a>
+            <span class="media-source-data-item-value">{{ slotProps.count }}</span>
           </div>
-          <footer class="card-footer">
-            <div class="card-footer-item tags">
-              <span class="tag is-primary is-pulled-right" v-for="(count, word) in sortedSomething(data.top_words)" :title="word">
-                <a :href="'https://twitter.com/search?q=' + word" target="_blank">
-                  <span class="tag-title">{{ word }}</span>
-                </a>
-                <span class="tag-value">{{ count }}</span>
-              </span>
-            </div>
-          </footer>
-        </div>
+        </MediaSourceDataCard>
       </div>
     </div>
   </div>
@@ -164,13 +115,41 @@
 
 <script>
   import _ from 'lodash'
+  import MediaSourceChart from './MediaSourceChart'
+  import MediaSourceDataCard from './MediaSourceDataCard'
 
   export default {
     name: 'media-source-data',
     props: ['data'],
-    components: {},
+    components: {
+      MediaSourceChart,
+      MediaSourceDataCard
+    },
     data () {
-      return {}
+      return {
+        colorsPalette: [
+          '#F3C300', '#875692', '#F38400', '#A1CAF1', '#BE0032', '#C2B280',
+          '#2B3D26', '#008856', '#E68FAC', '#0067A5', '#F99379', '#604E97',
+          '#F6A600', '#B3446C', '#DCD300', '#882D17', '#8DB600', '#654522',
+          '#E25822', '#E320BC', '#3AF2B8'
+        ],
+        charts: {
+          hashtags: false,
+          top_sources: false,
+          retweets: false,
+          mentions: false,
+          urls: false,
+          words: false
+        },
+        chartsData: {
+          hashtags: {},
+          top_sources: {},
+          retweets: {},
+          mentions: {},
+          urls: {},
+          words: {}
+        }
+      }
     },
     methods: {
       sortedSomething (what, howMany = 10) {
@@ -190,11 +169,26 @@
                  .orderBy([1], ['desc'])
                  .fromPairs()
                  .value()
+      },
+      processChartData (data) {
+        return {
+          labels: _.keys(data),
+          datasets: [
+            {
+              backgroundColor: _.take(this.colorsPalette, _.values(data).length),
+              data: _.values(data)
+            }
+          ]
+        }
+      },
+      toggleChart (name) {
+        this.charts[name] = !this.charts[name]
+        this.chartsData[name] = this.processChartData(this.sortedSomething(this.data[name]))
       }
     }
   }
 </script>
 
 <style lang="scss">
-  @import './../../assets/scss/MediaSource/index.scss'
+  @import './../../assets/scss/MediaSourceData/index.scss';
 </style>
