@@ -83,6 +83,10 @@ a {
 }
 
 .button-social {
+  &:hover {
+    color: #ffffff !important;
+  }
+
   &.googleplus__design__flat,
   &.pinterest__design__flat,
   &.tumblr__design__flat {
