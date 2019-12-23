@@ -23,6 +23,10 @@
       slug: 'media-sources'
     },
     {
+      title: 'Compare',
+      slug: 'compare'
+    },
+    {
       title: 'About Us',
       slug: 'about-us'
     },

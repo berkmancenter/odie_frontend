@@ -4,11 +4,11 @@
       <header class="card-header">
         <p class="card-header-title">
           {{ label }}
-          <b-tooltip label="Some info about this set" animated>
+          <b-tooltip label="Some info about this set" animated position="is-bottom">
             <i class="fa fa-info-circle" aria-hidden="true"></i>
           </b-tooltip>
-          <i class="fa fa-pie-chart" aria-hidden="true" @click="toggleChart(dataKey)" v-if="!chart"></i>
-          <i class="fa fa-list" aria-hidden="true" @click="toggleChart(dataKey)" v-if="chart"></i>
+          <i class="fa fa-pie-chart" aria-hidden="true" @click="toggleChart(dataKey)" v-if="!chart" title="Show chart"></i>
+          <i class="fa fa-list" aria-hidden="true" @click="toggleChart(dataKey)" v-if="chart" title="Show list"></i>
         </p>
       </header>
       <div class="card-content">

@@ -12,6 +12,7 @@ import MediaSet from '@/components/MediaSet/Index'
 import MediaSets from '@/components/MediaSets/Index'
 import AboutUs from '@/components/AboutUs/Index'
 import Contact from '@/components/Contact/Index'
+import Compare from '@/components/Compare/Index'
 import PageNotFound from '@/components/PageNotFound/Index'
 
 Vue.use(Router)
@@ -172,6 +173,25 @@ export default new Router({
           },
           props: true,
           component: Contact
+        },
+        {
+          path: '/compare',
+          name: 'compare.index',
+          meta: {
+            title: 'ODIE - Online Discourse Insight Explorer - Compare',
+            metaTags: [
+              {
+                name: 'description',
+                content: 'home description'
+              },
+              {
+                property: 'og:description',
+                content: 'home description'
+              }
+            ]
+          },
+          props: true,
+          component: Compare
         },
         {
           path: '404',

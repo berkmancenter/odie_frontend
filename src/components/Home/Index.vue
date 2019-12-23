@@ -18,22 +18,17 @@
 
           <div class="card">
             <div class="card-content has-text-weight-bold">
-              <h4>{{ source.attributes.name }}</h4>
+              <h4>
+                <router-link :to="'/media-source/' + source.id">
+                  {{ source.attributes.name }}
+                </router-link>
+              </h4>
               <div class="tags">
                 <span class="tag is-primary"><span class="tag-title">{{ source.attributes.latest_data.data.attributes.num_users }}</span> <span class="tag-value">users</span></span>
                 <span class="tag is-primary"><span class="tag-title">{{ source.attributes.latest_data.data.attributes.num_retweets }}</span> <span class="tag-value">retweets</span></span>
                 <span class="tag is-primary"><span class="tag-title">{{ source.attributes.latest_data.data.attributes.num_tweets }}</span> <span class="tag-value">tweets</span></span>
               </div>
             </div>
-            <footer class="card-footer noselect">
-              <router-link :to="'/media-source/' + source.id">
-                <div class="card-footer-item">
-                  <span>
-                    View
-                  </span>
-                </div>
-              </router-link>
-            </footer>
           </div>
         </div>
       </div>
