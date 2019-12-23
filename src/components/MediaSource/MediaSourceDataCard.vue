@@ -27,6 +27,12 @@
         </div>
       </div>
     </div>
+    <div class="media-source-data-item-showall"
+         :class="{ 'media-source-data-item-showall-less': !howManyShow }"
+         v-if="Object.keys(data).length > 10"
+         title="Show all"
+         @click="toggleShowAll()"
+    ></div>
   </div>
 </template>
 
@@ -49,19 +55,28 @@
           '#E25822', '#E320BC', '#3AF2B8'
         ],
         chart: false,
-        chartData: {}
+        chartData: {},
+        howManyShow: 10
       }
     },
     methods: {
-      sortedSomething (what, howMany = 10) {
+      sortedSomething (what) {
         let asInt = {}
+        let list = Object.keys(what)
 
-        let limitedObjects = Object.keys(what).slice(0, howMany - 1).reduce((result, key) => {
-          result[key] = what[key]
-          return result
-        }, {})
+        if (this.howManyShow === false) {
+          list = list.reduce((result, key) => {
+            result[key] = what[key]
+            return result
+          }, {})
+        } else {
+          list = list.slice(0, this.howManyShow - 1).reduce((result, key) => {
+            result[key] = what[key]
+            return result
+          }, {})
+        }
 
-        _.forEach(limitedObjects, (count, item) => {
+        _.forEach(list, (count, item) => {
           asInt[item] = parseInt(count)
         })
 
@@ -85,6 +100,13 @@
       toggleChart (name) {
         this.chart = !this.chart
         this.chartsData = this.processChartData(this.sortedSomething(this.data))
+      },
+      toggleShowAll () {
+        if (this.howManyShow === false) {
+          this.howManyShow = 10
+        } else {
+          this.howManyShow = false
+        }
       }
     }
   }

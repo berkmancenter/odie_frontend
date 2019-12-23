@@ -54,4 +54,23 @@
       }
     }
   }
+
+  .media-source-data-item-showall {
+    background: url('~/src/assets/images/arrow_down.svg') no-repeat center center;
+    width: 100%;
+    height: 30px;
+    margin-top: 5px;
+    cursor: pointer;
+    transition: 0.5s all;
+    padding-bottom: 10px;
+
+    &:hover {
+      padding-top: 10px;
+      background-position: center 5px;
+    }
+
+    &.media-source-data-item-showall-less {
+      background: url('~/src/assets/images/arrow_up.svg') no-repeat center center;
+    }
+  }
 }
