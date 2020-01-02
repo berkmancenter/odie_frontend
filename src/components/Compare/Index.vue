@@ -26,6 +26,12 @@
                 <th></th>
                 <th v-for="mediaSource in mediaSourcesValue">{{ mediaSource.name }}</th>
               </tr>
+              <DataRow title="Hashtags" data_key="hashtags" :items="getRowData()"></DataRow>
+              <DataRow title="Sources" data_key="top_sources" :items="getRowData()"></DataRow>
+              <DataRow title="Retweets" data_key="top_retweets" :items="getRowData()"></DataRow>
+              <DataRow title="Mentions" data_key="top_mentions" :items="getRowData()"></DataRow>
+              <DataRow title="Urls" data_key="top_urls" :items="getRowData()"></DataRow>
+              <DataRow title="Words" data_key="top_words" :items="getRowData()"></DataRow>
             </thead>
           </table>
         </div>
@@ -36,35 +42,28 @@
 
 <script>
   import _ from 'lodash'
+  import DataRow from './DataRow'
 
   export default {
     name: 'compare-index',
-    props: [],
-    components: {},
+    props: ['media_sources'],
+    components: {
+      DataRow
+    },
     data () {
       return {
         mediaSourcesValue: []
+      }
+    },
+    computed: {
+      mediaSourcesStore () {
+        return this.$store.state.mediaSources.mediaSources
       }
     },
     created () {
       this.$store.dispatch('mediaSources/loadMediaSources')
     },
     methods: {
-      mediaSources () {
-        if (this.$store.state.mediaSources.mediaSources.data) {
-          let mediaSetsIds = this.$route.query.mediaSets.split(',')
-
-          return this.$store.state.mediaSources.mediaSources.data.filter((mediaSource) => {
-            if (_.indexOf(mediaSetsIds, mediaSource.id) !== -1) {
-              return true
-            }
-
-            return false
-          })
-        }
-
-        return []
-      },
       getMediaSources () {
         if (this.$store.state.mediaSources.mediaSources.data) {
           return this.$store.state.mediaSources.mediaSources.data.map((mediaSource) => {
@@ -78,14 +77,43 @@
         return []
       },
       changed () {
-        this.$router.replace({
-          path: '/compare',
-          query: {
-            mediaSets: this.mediaSourcesValue.map((mediaSource) => {
-              return mediaSource.id
-            }).join(',')
-          }
+        if (this.mediaSourcesValue.length > 0) {
+          this.$router.push({
+            name: 'compare.index',
+            params: {
+              media_sources: this.mediaSourcesValue.map((mediaSource) => {
+                return mediaSource.id
+              }).join('…')
+            }
+          })
+        }
+      },
+      getRowData (mediaSourceId) {
+        const mediaSourcesArr = this.media_sources.split('…')
+
+        return this.$store.state.mediaSources.mediaSources.data.filter((mediaSource) => {
+          return _.includes(mediaSourcesArr, mediaSource.id)
         })
+      }
+    },
+    watch: {
+      mediaSourcesStore (newVal, oldVal) {
+        if (this.media_sources) {
+          const mediaSourcesArr = this.media_sources.split('…')
+
+          if (this.$store.state.mediaSources.mediaSources.data) {
+            this.mediaSourcesValue = this.$store.state.mediaSources.mediaSources.data
+              .map((mediaSource) => {
+                return {
+                  name: mediaSource.attributes.name,
+                  id: mediaSource.id
+                }
+              })
+              .filter((mediaSource) => {
+                return _.includes(mediaSourcesArr, mediaSource.id)
+              })
+          }
+        }
       }
     }
   }

@@ -21,13 +21,13 @@
     <section class="section">
       <div class="content">
         <transition name="fade">
-          <router-view :key="$route.fullPath" />
+          <router-view />
         </transition>
       </div>
     </section>
 
     <footer class="footer">
-      <div class="content has-text-centered">
+      <div class="content has-text-centered noselect">
         <img class="footer-logo" src="@/assets/images/logo_berkman.svg">
         <div>{{ new Date().getFullYear() }} @ Berkman Klein Center</div>
         <div>Built: {{ build_date }}</div>

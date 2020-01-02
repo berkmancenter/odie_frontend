@@ -175,7 +175,7 @@ export default new Router({
           component: Contact
         },
         {
-          path: '/compare',
+          path: '/compare/:media_sources?',
           name: 'compare.index',
           meta: {
             title: 'ODIE - Online Discourse Insight Explorer - Compare',

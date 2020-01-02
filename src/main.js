@@ -15,19 +15,12 @@ import './plugins/vue-slider-component'
 import './plugins/hotjar'
 import './plugins/buefy'
 import './plugins/vue-multiselect'
-import Pace from 'pace-js/pace.min'
 import Vue from 'vue'
 import App from './App'
 import store from './store'
 import router from './router'
 
 Vue.config.productionTip = false
-
-// Show loader when loading lazy load components
-router.beforeEach((to, from, next) => {
-  Pace.start()
-  next()
-})
 
 /* eslint-disable no-new */
 new Vue({
