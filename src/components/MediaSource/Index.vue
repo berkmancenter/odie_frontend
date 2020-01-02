@@ -13,7 +13,6 @@
 </template>
 
 <script>
-  import _ from 'lodash'
   import MediaSourceData from './MediaSourceData'
   import VueGoodshare from 'vue-goodshare'
 
@@ -30,26 +29,7 @@
     created () {
       this.$store.dispatch('mediaSources/loadMediaSource', this.$props.media_source_id)
     },
-    methods: {
-      sortedSomething (what, howMany = 10) {
-        let asInt = {}
-
-        let limitedObjects = Object.keys(what).slice(0, howMany - 1).reduce((result, key) => {
-          result[key] = what[key]
-          return result
-        }, {})
-
-        _.forEach(limitedObjects, (count, item) => {
-          asInt[item] = parseInt(count)
-        })
-
-        return _(asInt)
-                 .toPairs()
-                 .orderBy([1], ['desc'])
-                 .fromPairs()
-                 .value()
-      }
-    }
+    methods: {}
   }
 </script>
 

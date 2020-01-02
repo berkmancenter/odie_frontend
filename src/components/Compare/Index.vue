@@ -1,7 +1,7 @@
 <template>
   <div class="compare-view">
     <div class="container noselect">
-      <h1>Compare Media Sets and Sources</h1>
+      <h1>Compare Media Sources</h1>
 
       <p>
         Builder description vestibulum vitae risus vitae urna molestie ultricies vitae nec risus. Etiam ut luctus nulla. Sed sapien arcu, luctus vel sodales vel, malesuada at neque. Pellentesque congue nisl ut justo sagittis rutrum. Praesent quam sem, feugiat ac velit sed, vulputate aliquet leo. Aenean aliquet arcu et magna suscipit blandit. Fusce lacus diam, gravida congue felis et, ultrices aliquet neque. Morbi lacinia mi velit, sed fringilla nibh laoreet id. Phasellus nec varius nibh. Nullam vitae nibh et urna aliquet iaculis vitae id arcu. Phasellus et maximus ligula. In neque velit, pulvinar in iaculis a, cursus sed tellus.
@@ -26,13 +26,15 @@
                 <th></th>
                 <th v-for="mediaSource in mediaSourcesValue">{{ mediaSource.name }}</th>
               </tr>
+            </thead>
+            <tbody v-if="media_sources">
               <DataRow title="Hashtags" data_key="hashtags" :items="getRowData()"></DataRow>
               <DataRow title="Sources" data_key="top_sources" :items="getRowData()"></DataRow>
               <DataRow title="Retweets" data_key="top_retweets" :items="getRowData()"></DataRow>
               <DataRow title="Mentions" data_key="top_mentions" :items="getRowData()"></DataRow>
               <DataRow title="Urls" data_key="top_urls" :items="getRowData()"></DataRow>
               <DataRow title="Words" data_key="top_words" :items="getRowData()"></DataRow>
-            </thead>
+            </tbody>
           </table>
         </div>
       </div>
