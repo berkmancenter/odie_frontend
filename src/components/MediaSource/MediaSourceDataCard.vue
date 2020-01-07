@@ -19,9 +19,9 @@
           <div v-if="!chart">
             <div
               class="media-source-data-item"
-              v-for="(count, item) in sortedSomething(data)"
+              v-for="item in sortedSomething(data)"
             >
-              <slot :count="count" :item="item"></slot>
+              <slot :count="item[1]" :item="item[0]"></slot>
             </div>
           </div>
         </div>
@@ -61,38 +61,30 @@
     },
     methods: {
       sortedSomething (what) {
-        let asInt = {}
-        let list = Object.keys(what)
-
-        if (this.howManyShow === false) {
-          list = list.reduce((result, key) => {
-            result[key] = what[key]
-            return result
-          }, {})
-        } else {
-          list = list.slice(0, this.howManyShow - 1).reduce((result, key) => {
-            result[key] = what[key]
-            return result
-          }, {})
+        var items = []
+        for (var item in what) {
+          items.push([item, parseInt(what[item])])
         }
 
-        _.forEach(list, (count, item) => {
-          asInt[item] = parseInt(count)
-        })
+        items = _(items).orderBy([1], ['desc']).value()
 
-        return _(asInt)
-                 .toPairs()
-                 .orderBy([1], ['desc'])
-                 .fromPairs()
-                 .value()
+        if (this.howManyShow !== false) {
+          items = items.slice(0, this.howManyShow - 1)
+        }
+
+        return items
       },
       processChartData (data) {
         return {
-          labels: _.keys(data),
+          labels: _.map(data, (item) => {
+            return item[0]
+          }),
           datasets: [
             {
               backgroundColor: _.take(this.colorsPalette, _.values(data).length),
-              data: _.values(data)
+              data: _.map(data, (item) => {
+                return item[1]
+              })
             }
           ]
         }

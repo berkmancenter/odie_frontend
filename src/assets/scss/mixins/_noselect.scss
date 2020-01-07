@@ -5,3 +5,7 @@
 .noselect {
   @include noselect();
 }
+
+.noselect-or-maybe-select {
+  user-select: text;
+}

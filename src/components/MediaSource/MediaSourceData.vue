@@ -55,7 +55,7 @@
       <div class="media-source-data-card-container">
         <MediaSourceDataCard label="Top Retweets" dataKey="top_retweets" :data="data.top_retweets">
           <div slot-scope="slotProps">
-            <div class="media-source-data-item-title">{{ slotProps.item }}</div>
+            <div class="media-source-data-item-title noselect-or-maybe-select">{{ slotProps.item }}</div>
             <span class="media-source-data-item-value">{{ slotProps.count }}</span>
           </div>
         </MediaSourceDataCard>
