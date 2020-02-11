@@ -21,7 +21,7 @@
               class="media-source-data-item"
               v-for="item in sortedSomething(data)"
             >
-              <slot :count="item[1]" :item="item[0]"></slot>
+              <slot :count="item[1]" :item="item[0]" :link="item[2].link"></slot>
             </div>
           </div>
         </div>
@@ -63,7 +63,11 @@
       sortedSomething (what) {
         var items = []
         for (var item in what) {
-          items.push([item, parseInt(what[item])])
+          if (typeof what[item] === 'object') {
+            items.push([item, parseInt(what[item].count), what[item]])
+          } else {
+            items.push([item, parseInt(what[item]), []])
+          }
         }
 
         items = _(items).orderBy([1], ['desc']).value()

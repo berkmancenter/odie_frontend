@@ -55,7 +55,15 @@
       <div class="media-source-data-card-container">
         <MediaSourceDataCard label="Top Retweets" dataKey="top_retweets" :data="data.top_retweets">
           <div slot-scope="slotProps">
-            <div class="media-source-data-item-title noselect-or-maybe-select">{{ slotProps.item }}</div>
+            <a :href="slotProps.link"
+               target="_blank"
+               :title="slotProps.item"
+               class="media-source-data-item-title"
+               v-if="slotProps.link"
+            >
+              @{{ slotProps.item }}
+            </a>
+            <div class="media-source-data-item-title noselect-or-maybe-select" v-if="!slotProps.link">{{ slotProps.item }}</div>
             <span class="media-source-data-item-value">{{ slotProps.count }}</span>
           </div>
         </MediaSourceDataCard>
