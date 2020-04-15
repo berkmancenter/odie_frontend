@@ -1,14 +1,14 @@
 <template>
-  <div class="media-sets-view">
+  <div class="cohorts-sets-view">
     <div class="container">
-      <h1>Media Sets</h1>
+      <h1>Cohorts</h1>
     </div>
   </div>
 </template>
 
 <script>
   export default {
-    name: 'media-sets-index',
+    name: 'cohorts-sets-index',
     components: {},
     data () {
       return {}
@@ -19,5 +19,5 @@
 </script>
 
 <style lang="scss">
-  @import './../../assets/scss/MediaSets/index.scss'
+  @import './../../assets/scss/CohortsSets/index.scss'
 </style>

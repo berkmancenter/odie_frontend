@@ -11,29 +11,29 @@
         </div>
       </section>
 
-      <h3 class="has-text-centered">Media Sources</h3>
+      <h3 class="has-text-centered">Cohorts</h3>
 
       <div class="columns">
-        <div class="column is-half" v-for="source in $store.state.mediaSources.mediaSources.data">
+        <div class="column is-half" v-for="cohort in $store.state.cohorts.cohorts.data">
 
           <div class="card">
             <div class="card-content has-text-weight-bold">
               <h4>
-                <router-link :to="'/media-source/' + source.id">
-                  {{ source.attributes.name }}
+                <router-link :to="'/cohorts/' + cohort.id">
+                  {{ cohort.attributes.description }}
                 </router-link>
               </h4>
               <div class="tags">
-                <span class="tag is-primary"><span class="tag-title">{{ source.attributes.latest_data.data.attributes.num_users }}</span> <span class="tag-value">users</span></span>
-                <span class="tag is-primary"><span class="tag-title">{{ source.attributes.latest_data.data.attributes.num_retweets }}</span> <span class="tag-value">retweets</span></span>
-                <span class="tag is-primary"><span class="tag-title">{{ source.attributes.latest_data.data.attributes.num_tweets }}</span> <span class="tag-value">tweets</span></span>
+                <span class="tag is-primary"><span class="tag-title">{{ cohort.attributes.latest_data.data.attributes.num_users }}</span> <span class="tag-value">users</span></span>
+                <span class="tag is-primary"><span class="tag-title">{{ cohort.attributes.latest_data.data.attributes.num_retweets }}</span> <span class="tag-value">retweets</span></span>
+                <span class="tag is-primary"><span class="tag-title">{{ cohort.attributes.latest_data.data.attributes.num_tweets }}</span> <span class="tag-value">tweets</span></span>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <router-link class="button is-primary home-view-card-show-all" :to="'/media-sources'">
+      <router-link class="button is-primary home-view-card-show-all" :to="'/cohorts'">
         List All
       </router-link>
     </div>
@@ -48,7 +48,7 @@
       return {}
     },
     created () {
-      this.$store.dispatch('mediaSources/loadMediaSources')
+      this.$store.dispatch('cohorts/loadCohorts')
     },
     methods: {}
   }

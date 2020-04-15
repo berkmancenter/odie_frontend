@@ -1,16 +1,16 @@
 import Proxy from './Proxy'
 import config from './../config/general'
 
-class MediaSourcesProxy extends Proxy {
+class CohortsProxy extends Proxy {
   /**
-   * The constructor for the ToolsProxy.
+   * The constructor for the CohortsProxy.
    *
    * @param {Object} parameters The query parameters.
    */
   constructor (parameters = {}) {
     let apiUrl = config.api.url
 
-    super(apiUrl, 'media_sources', parameters)
+    super(apiUrl, 'cohorts', parameters)
   }
 
   /**
@@ -19,10 +19,10 @@ class MediaSourcesProxy extends Proxy {
    * @returns {Promise} The result in a promise.
    */
   aggregated (params = null) {
-    return this.submit('get', `${this.endpoint}/aggregate`, {
+    return this.submit('get', `${this.endpoint}`, {
       params: params
     })
   }
 }
 
-export default MediaSourcesProxy
+export default CohortsProxy

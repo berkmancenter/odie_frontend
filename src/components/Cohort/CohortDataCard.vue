@@ -1,5 +1,5 @@
 <template>
-  <div class="media-source-data-card">
+  <div class="cohort-data-card">
     <div class="card">
       <header class="card-header">
         <p class="card-header-title">
@@ -13,12 +13,12 @@
       </header>
       <div class="card-content">
         <div class="content">
-          <div class="media-source-data-chart" v-if="chart">
-            <MediaSourceChart :chart-data="chartsData"></MediaSourceChart>
+          <div class="cohort-data-chart" v-if="chart">
+            <CohortChart :chart-data="chartsData"></CohortChart>
           </div>
           <div v-if="!chart">
             <div
-              class="media-source-data-item"
+              class="cohort-data-item"
               v-for="item in sortedSomething(data)"
             >
               <slot :count="item[1]" :item="item[0]" :link="item[2].link"></slot>
@@ -27,8 +27,8 @@
         </div>
       </div>
     </div>
-    <div class="media-source-data-item-showall"
-         :class="{ 'media-source-data-item-showall-less': !howManyShow }"
+    <div class="cohort-data-item-showall"
+         :class="{ 'cohort-data-item-showall-less': !howManyShow }"
          v-if="Object.keys(data).length > 10"
          title="Show all"
          @click="toggleShowAll()"
@@ -38,13 +38,13 @@
 
 <script>
   import _ from 'lodash'
-  import MediaSourceChart from './MediaSourceChart'
+  import CohortChart from './CohortChart'
 
   export default {
-    name: 'media-source-data',
+    name: 'cohort-data',
     props: ['data', 'label', 'dataKey'],
     components: {
-      MediaSourceChart
+      CohortChart
     },
     data () {
       return {

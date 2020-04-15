@@ -1,11 +1,11 @@
 import Vuex from 'vuex'
-import mediaSources from './modules/media-sources'
+import cohorts from './modules/cohorts'
 
 const debug = process.env.NODE_ENV !== 'production'
 
 export default new Vuex.Store({
   modules: {
-    mediaSources
+    cohorts
   },
   strict: debug
 })

@@ -15,12 +15,12 @@
       slug: ''
     },
     {
-      title: 'Media Set Builder',
+      title: 'Cohort Builder',
       slug: 'builder'
     },
     {
-      title: 'Media Sources',
-      slug: 'media-sources'
+      title: 'Cohorts',
+      slug: 'cohorts'
     },
     {
       title: 'Compare',

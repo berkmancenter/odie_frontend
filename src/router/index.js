@@ -5,11 +5,11 @@ import Router from 'vue-router'
 // loader lib doesn't seem to like the async router loader...
 import Layout from '@/layouts/Default'
 import Home from '@/components/Home/Index'
-import MediaSources from '@/components/MediaSources/Index'
-import MediaSource from '@/components/MediaSource/Index'
+import Cohorts from '@/components/Cohorts/Index'
+import Cohort from '@/components/Cohort/Index'
 import Builder from '@/components/Builder/Index'
-import MediaSet from '@/components/MediaSet/Index'
-import MediaSets from '@/components/MediaSets/Index'
+import CohortsSet from '@/components/CohortsSet/Index'
+import CohortsSets from '@/components/CohortsSets/Index'
 import AboutUs from '@/components/AboutUs/Index'
 import Contact from '@/components/Contact/Index'
 import Compare from '@/components/Compare/Index'
@@ -43,10 +43,10 @@ export default new Router({
           component: Home
         },
         {
-          path: '/media-sources',
-          name: 'media-sources.index',
+          path: '/cohorts',
+          name: 'cohorts.index',
           meta: {
-            title: 'ODIE - Online Discourse Insight Explorer - Media Sources',
+            title: 'ODIE - Online Discourse Insight Explorer - Cohorts',
             metaTags: [
               {
                 name: 'description',
@@ -58,13 +58,13 @@ export default new Router({
               }
             ]
           },
-          component: MediaSources
+          component: Cohorts
         },
         {
-          path: '/media-source/:media_source_id',
-          name: 'media-source.index',
+          path: '/cohort/:cohort_id',
+          name: 'cohort.index',
           meta: {
-            title: 'ODIE - Online Discourse Insight Explorer - Media Source',
+            title: 'ODIE - Online Discourse Insight Explorer - Cohort',
             metaTags: [
               {
                 name: 'description',
@@ -77,7 +77,7 @@ export default new Router({
             ]
           },
           props: true,
-          component: MediaSource
+          component: Cohort
         },
         {
           path: '/builder',
@@ -99,10 +99,10 @@ export default new Router({
           component: Builder
         },
         {
-          path: '/media-set',
-          name: 'media-set.index',
+          path: '/cohorts-set',
+          name: 'cohorts-set.index',
           meta: {
-            title: 'ODIE - Online Discourse Insight Explorer - Media Set',
+            title: 'ODIE - Online Discourse Insight Explorer - Cohort',
             metaTags: [
               {
                 name: 'description',
@@ -115,13 +115,13 @@ export default new Router({
             ]
           },
           props: true,
-          component: MediaSet
+          component: CohortsSet
         },
         {
-          path: '/media-sets',
-          name: 'media-sets.index',
+          path: '/cohorts-sets',
+          name: 'cohorts-sets.index',
           meta: {
-            title: 'ODIE - Online Discourse Insight Explorer - Media Sets',
+            title: 'ODIE - Online Discourse Insight Explorer - Cohorts',
             metaTags: [
               {
                 name: 'description',
@@ -134,7 +134,7 @@ export default new Router({
             ]
           },
           props: true,
-          component: MediaSets
+          component: CohortsSets
         },
         {
           path: '/about-us',
