@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import Config from '../config/general'
 
 class BaseProxy {
   /**
@@ -8,6 +9,7 @@ class BaseProxy {
    * @param {Object} parameters The parameters for the request.
    */
   constructor (apiUrl, endpoint, parameters = {}) {
+    this.apiUrl = apiUrl
     this.endpoint = apiUrl + '/' + endpoint
     this.parameters = parameters
   }
@@ -80,16 +82,31 @@ class BaseProxy {
    */
   submit (requestType, url, data = null, options = {}) {
     return new Promise((resolve, reject) => {
-      Vue.$http[requestType](url + this.getParameterString(), data, options)
+      Vue.$http.post(this.apiUrl + '/users/sign_in', {
+        user: {
+          email: Config.api.username,
+          password: Config.api.password
+        }
+      }, {
+        headers: {
+          'Accept': '*/*'
+        }
+      })
         .then((response) => {
-          resolve(response.data)
+          Vue.$http[requestType](url + this.getParameterString(), data, options)
+            .then((response) => {
+              resolve(response.data)
+            })
+            .catch(({ response }) => {
+              if (response) {
+                reject(response.data)
+              } else {
+                reject(new Error('Something went wrong'))
+              }
+            })
         })
         .catch(({ response }) => {
-          if (response) {
-            reject(response.data)
-          } else {
-            reject(new Error('Something went wrong'))
-          }
+          reject(new Error('Something went wrong'))
         })
     })
   }

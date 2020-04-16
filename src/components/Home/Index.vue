@@ -19,7 +19,7 @@
           <div class="card">
             <div class="card-content has-text-weight-bold">
               <h4>
-                <router-link :to="'/cohorts/' + cohort.id">
+                <router-link :to="'/cohort/' + cohort.id">
                   {{ cohort.attributes.description }}
                 </router-link>
               </h4>
