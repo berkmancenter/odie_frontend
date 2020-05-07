@@ -81,34 +81,75 @@ class BaseProxy {
    * @returns {Promise} The result in a promise.
    */
   submit (requestType, url, data = null, options = {}) {
-    return new Promise((resolve, reject) => {
-      Vue.$http.post(this.apiUrl + '/users/sign_in', {
-        user: {
-          email: Config.api.username,
-          password: Config.api.password
+    let authToken = sessionStorage.getItem('odie_api_token')
+
+    console.log(authToken)
+
+    if (authToken === null) {
+      return new Promise((resolve, reject) => {
+        Vue.$http.post(this.apiUrl + '/login.json', {
+          api_user: {
+            email: Config.api.username,
+            password: Config.api.password
+          }
+        })
+          .then((response) => {
+            authToken = response.headers.authorization
+
+            if (sessionStorage.getItem('odie_api_token') === null) {
+              sessionStorage.setItem('odie_api_token', authToken)
+            }
+
+            this.processSubmit(requestType, url, data, options, authToken, resolve, reject)
+          })
+          .catch(({ response }) => {
+            reject(new Error('Something went wrong'))
+          })
+      })
+    } else {
+      return new Promise((resolve, reject) => {
+        this.processSubmit(requestType, url, data, options, authToken, resolve, reject)
+      })
+    }
+  }
+
+  /**
+   * The method used to perform an AJAX-request.
+   *
+   * @param {string}      requestType The request type.
+   * @param {string}      url         The URL for the request.
+   * @param {Object|null} data        The data to be send with the request.
+   * @param {string}      authToken   The access token
+   * @param {Function}    resolve     The success callback
+   * @param {Function}    reject      The error callback
+   *
+   * @returns {Promise} The result in a promise.
+   */
+  processSubmit (requestType, url, data = null, options = {}, authToken = '', resolve = false, reject = false) {
+    if (data === null) {
+      data = {}
+    }
+
+    data.headers = {
+      'Authorization': authToken
+    }
+
+    Vue.$http[requestType](url + this.getParameterString(), data, options)
+      .then((response) => {
+        resolve(response.data)
+      })
+      .catch(({ response }) => {
+        if (response.status === 401) {
+          sessionStorage.removeItem('odie_api_token')
+          window.location.reload()
         }
-      }, {
-        headers: {
-          'Accept': '*/*'
+
+        if (response) {
+          reject(response.data)
+        } else {
+          reject(new Error('Something went wrong'))
         }
       })
-        .then((response) => {
-          Vue.$http[requestType](url + this.getParameterString(), data, options)
-            .then((response) => {
-              resolve(response.data)
-            })
-            .catch(({ response }) => {
-              if (response) {
-                reject(response.data)
-              } else {
-                reject(new Error('Something went wrong'))
-              }
-            })
-        })
-        .catch(({ response }) => {
-          reject(new Error('Something went wrong'))
-        })
-    })
   }
 
   /**
