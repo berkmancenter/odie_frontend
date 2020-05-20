@@ -13,7 +13,7 @@
 
       <h3 class="has-text-centered">Cohorts</h3>
 
-      <div class="columns">
+      <div class="columns is-multiline">
         <div class="column is-half" v-for="cohort in $store.state.cohorts.cohorts.data">
 
           <div class="card">
