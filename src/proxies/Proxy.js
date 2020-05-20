@@ -12,6 +12,7 @@ class BaseProxy {
     this.apiUrl = apiUrl
     this.endpoint = apiUrl + '/' + endpoint
     this.parameters = parameters
+    this.timeout = 10000
   }
 
   /**
@@ -83,7 +84,7 @@ class BaseProxy {
   submit (requestType, url, data = null, options = {}) {
     let authToken = sessionStorage.getItem('odie_api_token')
 
-    console.log(authToken)
+    options.timeout = this.timeout
 
     if (authToken === null) {
       return new Promise((resolve, reject) => {
@@ -92,7 +93,7 @@ class BaseProxy {
             email: Config.api.username,
             password: Config.api.password
           }
-        })
+        }, options)
           .then((response) => {
             authToken = response.headers.authorization
 
@@ -133,6 +134,8 @@ class BaseProxy {
     data.headers = {
       'Authorization': authToken
     }
+
+    options.timeout = this.timeout
 
     Vue.$http[requestType](url + this.getParameterString(), data, options)
       .then((response) => {
