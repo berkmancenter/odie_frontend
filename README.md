@@ -33,6 +33,9 @@ The application can be developed and deployed using Docker.
 
 ### Development
 
+Copy `src/config/general.js_template` to `src/config/general.js` and customize
+to suite your environment.
+
 Run:
 
 `docker-compose up`
