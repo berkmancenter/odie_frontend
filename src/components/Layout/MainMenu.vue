@@ -11,28 +11,8 @@
 
   const menuItems = [
     {
-      title: 'Home',
-      slug: ''
-    },
-    {
-      title: 'Cohort Builder',
-      slug: 'builder'
-    },
-    {
-      title: 'Cohorts',
-      slug: 'cohorts'
-    },
-    {
-      title: 'Compare',
+      title: 'Cohorts comparison',
       slug: 'compare'
-    },
-    {
-      title: 'About Us',
-      slug: 'about-us'
-    },
-    {
-      title: 'Contact',
-      slug: 'contact'
     }
   ]
 

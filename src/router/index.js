@@ -4,16 +4,17 @@ import Router from 'vue-router'
 // @TODO Just a temporary solution, we don't want to preload it, but the pace.js
 // loader lib doesn't seem to like the async router loader...
 import Layout from '@/layouts/Default'
-import Home from '@/components/Home/Index'
-import Cohorts from '@/components/Cohorts/Index'
-import Cohort from '@/components/Cohort/Index'
-import Builder from '@/components/Builder/Index'
-import CohortsSet from '@/components/CohortsSet/Index'
-import CohortsSets from '@/components/CohortsSets/Index'
-import AboutUs from '@/components/AboutUs/Index'
-import Contact from '@/components/Contact/Index'
-import Compare from '@/components/Compare/Index'
+// import Home from '@/components/Home/Index'
+// import Cohorts from '@/components/Cohorts/Index'
+// import Cohort from '@/components/Cohort/Index'
+// import Builder from '@/components/Builder/Index'
+// import CohortsSet from '@/components/CohortsSet/Index'
+// import CohortsSets from '@/components/CohortsSets/Index'
+// import AboutUs from '@/components/AboutUs/Index'
+// import Contact from '@/components/Contact/Index'
+// import Compare from '@/components/Compare/Index'
 import PageNotFound from '@/components/PageNotFound/Index'
+import Compare from '@/components/Compare_V2/Index'
 
 Vue.use(Router)
 
@@ -25,172 +26,25 @@ export default new Router({
       component: Layout,
       children: [
         {
-          path: '/',
-          name: 'home.index',
-          meta: {
-            title: 'ODIE - Online Discourse Insight Explorer',
-            metaTags: [
-              {
-                name: 'description',
-                content: 'home description'
-              },
-              {
-                property: 'og:description',
-                content: 'home description'
-              }
-            ]
-          },
-          component: Home
+          path: '',
+          redirect: 'compare'
         },
         {
-          path: '/cohorts',
-          name: 'cohorts.index',
-          meta: {
-            title: 'ODIE - Online Discourse Insight Explorer - Cohorts',
-            metaTags: [
-              {
-                name: 'description',
-                content: 'home description'
-              },
-              {
-                property: 'og:description',
-                content: 'home description'
-              }
-            ]
-          },
-          component: Cohorts
-        },
-        {
-          path: '/cohort/:cohort_id',
-          name: 'cohort.index',
-          meta: {
-            title: 'ODIE - Online Discourse Insight Explorer - Cohort',
-            metaTags: [
-              {
-                name: 'description',
-                content: 'home description'
-              },
-              {
-                property: 'og:description',
-                content: 'home description'
-              }
-            ]
-          },
-          props: true,
-          component: Cohort
-        },
-        {
-          path: '/builder',
-          name: 'builder.index',
-          meta: {
-            title: 'ODIE - Online Discourse Insight Explorer - Builder',
-            metaTags: [
-              {
-                name: 'description',
-                content: 'home description'
-              },
-              {
-                property: 'og:description',
-                content: 'home description'
-              }
-            ]
-          },
-          props: true,
-          component: Builder
-        },
-        {
-          path: '/cohorts-set',
-          name: 'cohorts-set.index',
-          meta: {
-            title: 'ODIE - Online Discourse Insight Explorer - Cohort',
-            metaTags: [
-              {
-                name: 'description',
-                content: 'home description'
-              },
-              {
-                property: 'og:description',
-                content: 'home description'
-              }
-            ]
-          },
-          props: true,
-          component: CohortsSet
-        },
-        {
-          path: '/cohorts-sets',
-          name: 'cohorts-sets.index',
-          meta: {
-            title: 'ODIE - Online Discourse Insight Explorer - Cohorts',
-            metaTags: [
-              {
-                name: 'description',
-                content: 'home description'
-              },
-              {
-                property: 'og:description',
-                content: 'home description'
-              }
-            ]
-          },
-          props: true,
-          component: CohortsSets
-        },
-        {
-          path: '/about-us',
-          name: 'about-us.index',
-          meta: {
-            title: 'ODIE - Online Discourse Insight Explorer - About Us',
-            metaTags: [
-              {
-                name: 'description',
-                content: 'home description'
-              },
-              {
-                property: 'og:description',
-                content: 'home description'
-              }
-            ]
-          },
-          props: true,
-          component: AboutUs
-        },
-        {
-          path: '/contact',
-          name: 'contact.index',
-          meta: {
-            title: 'ODIE - Online Discourse Insight Explorer - Countac Us',
-            metaTags: [
-              {
-                name: 'description',
-                content: 'home description'
-              },
-              {
-                property: 'og:description',
-                content: 'home description'
-              }
-            ]
-          },
-          props: true,
-          component: Contact
-        },
-        {
-          path: '/compare/:media_sources?',
+          path: 'compare',
           name: 'compare.index',
           meta: {
-            title: 'ODIE - Online Discourse Insight Explorer - Compare',
+            title: 'ODIE - Online Discourse Insight Explorer - Compare Cohorts',
             metaTags: [
               {
                 name: 'description',
-                content: 'home description'
+                content: 'compare description'
               },
               {
                 property: 'og:description',
-                content: 'home description'
+                content: 'compare description'
               }
             ]
           },
-          props: true,
           component: Compare
         },
         {

@@ -3,7 +3,7 @@
     <div class="header">
       <div class="header-logo">
         <div>
-          <router-link :to="'/'" class="header-logo-link noselect">
+          <router-link :to="'/compare'" class="header-logo-link noselect">
             <span>OD</span>
             <img src="@/assets/images/logo_being.svg">
             <span>IE</span>

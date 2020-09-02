@@ -44,8 +44,11 @@ body, html {
 .footer {
   .footer-logo {
     height: 50px;
-
   }
+}
+
+footer.footer {
+  padding: 2rem;
 }
 
 .fade-enter-active, .fade-leave-active {
