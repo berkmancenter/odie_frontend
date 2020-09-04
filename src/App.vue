@@ -12,7 +12,6 @@
   import SafeHtml from './components/Shared/SafeHtml/Index'
   import Filer from './components/Shared/Filer/Index'
   import SafeHtmlList from './components/Shared/SafeHtmlList/Index'
-  import SwitMenu from './components/Shared/SwitMenu/Index'
   import Page from './components/Shared/Page/Index'
 
   // register shared components globally
@@ -22,7 +21,6 @@
   Vue.component('safe-html', SafeHtml)
   Vue.component('filer', Filer)
   Vue.component('safe-html-list', SafeHtmlList)
-  Vue.component('swit-menu', SwitMenu)
   Vue.component('page', Page)
 
   export default {
