@@ -13,15 +13,11 @@ class CohortsProxy extends Proxy {
     super(apiUrl, 'cohorts', parameters)
   }
 
-  /**
-   * Method used to fetch all items from the API.
-   *
-   * @returns {Promise} The result in a promise.
-   */
-  aggregated (params = null) {
-    return this.submit('get', `${this.endpoint}`, {
-      params: params
-    })
+  comparison (params = null) {
+    return this.submit(
+      'get',
+      `${this.apiUrl}/cohort/${params.cohort_a_id}/timespan/${params.timespan_a_id}/cohort/${params.cohort_b_id}/timespan/${params.timespan_b_id}`
+    )
   }
 }
 
