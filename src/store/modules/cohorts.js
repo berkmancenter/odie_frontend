@@ -61,7 +61,6 @@ const actions = {
         timespan_b_id: state.timespan_b
       })
       .then((response) => {
-        console.log(response)
         context.commit('setComparisonData', response.data)
       })
   }

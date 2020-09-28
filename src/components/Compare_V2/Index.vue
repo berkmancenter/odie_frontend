@@ -81,17 +81,17 @@
         </div>
       </div>
 
-      <div v-if="1 == 2 && cohort_a && cohort_b && timespan_a && timespan_b">
+      <div v-if="cohort_a && cohort_b && timespan_a && timespan_b && $store.state.cohorts.comparisonData">
         <div class="columns">
           <div class="column is-two-fifths has-text-centered">
             <div class="is-pulled-right">
-              <h3>{{ cohortData(cohort_a).name }}</h3>
+              <h3>{{ cohortData(cohort_a).attributes.name }}</h3>
             </div>
           </div>
           <div class="column has-text-centered"></div>
           <div class="column is-two-fifths has-text-centered">
             <div class="is-pulled-left">
-              <h3>{{ cohortData(cohort_b).name }}</h3>
+              <h3>{{ cohortData(cohort_b).attributes.name }}</h3>
             </div>
           </div>
         </div>
@@ -99,7 +99,7 @@
         <div class="columns">
           <div class="column is-two-fifths has-text-centered">
             <div class="is-pulled-right">
-              {{ cohortData(cohort_a).n_tweets }}
+              {{ comparisonData.attributes.results.summary_a.n_tweets }}
             </div>
           </div>
           <div class="column has-text-centered">
@@ -107,7 +107,7 @@
           </div>
           <div class="column is-two-fifths has-text-centered">
             <div class="is-pulled-left">
-              {{ cohortData(cohort_b).n_tweets }}
+              {{ comparisonData.attributes.results.summary_b.n_tweets }}
             </div>
           </div>
         </div>
@@ -115,7 +115,7 @@
         <div class="columns">
           <div class="column is-two-fifths has-text-centered">
             <div class="is-pulled-right">
-              {{ cohortData(cohort_a).n_accounts }}
+              {{ comparisonData.attributes.results.summary_a.n_accounts }}
             </div>
           </div>
           <div class="column has-text-centered">
@@ -123,7 +123,7 @@
           </div>
           <div class="column is-two-fifths has-text-centered">
             <div class="is-pulled-left">
-              {{ cohortData(cohort_b).n_accounts }}
+              {{ comparisonData.attributes.results.summary_b.n_accounts }}
             </div>
           </div>
         </div>
@@ -135,16 +135,32 @@
         </div>
 
         <div class="columns">
-          <div class="column is-two-fifths has-text-centered">
-            <div class="is-pulled-right">
-              <div v-for="phrase in cohortData(cohort_a).top_unigrams">{{ phrase }}</div>
-            </div>
+          <div class="column is-two-fifths has-text-right">
+            <b-tabs v-model="activeAGRamsTab" position="is-right">
+              <b-tab-item label="Bigrams">
+                <div v-for="(number, phrase) in comparisonData.attributes.results.summary_a.top_bigrams">{{ phrase }}</div>
+              </b-tab-item>
+              <b-tab-item label="Trigrams">
+                <div v-for="(number, phrase) in comparisonData.attributes.results.summary_a.top_trigrams">{{ phrase }}</div>
+              </b-tab-item>
+              <b-tab-item label="Unigrams">
+                <div v-for="(number, phrase) in comparisonData.attributes.results.summary_a.top_unigrams">{{ phrase }}</div>
+              </b-tab-item>
+            </b-tabs>
           </div>
           <div class="column has-text-centered"></div>
-          <div class="column is-two-fifths has-text-centered">
-            <div class="is-pulled-left">
-              <div v-for="phrase in cohortData(cohort_b).top_unigrams">{{ phrase }}</div>
-            </div>
+          <div class="column is-two-fifths has-text-left">
+            <b-tabs v-model="activeBGRamsTab" position="is-left">
+              <b-tab-item label="Bigrams">
+                <div v-for="(number, phrase) in comparisonData.attributes.results.summary_b.top_bigrams">{{ phrase }}</div>
+              </b-tab-item>
+              <b-tab-item label="Trigrams">
+                <div v-for="(number, phrase) in comparisonData.attributes.results.summary_b.top_trigrams">{{ phrase }}</div>
+              </b-tab-item>
+              <b-tab-item label="Unigrams">
+                <div v-for="(number, phrase) in comparisonData.attributes.results.summary_b.top_unigrams">{{ phrase }}</div>
+              </b-tab-item>
+            </b-tabs>
           </div>
         </div>
       </div>
@@ -168,7 +184,9 @@
         cohort_a: false,
         cohort_b: false,
         timespan_a: false,
-        timespan_b: false
+        timespan_b: false,
+        activeAGRamsTab: 0,
+        activeBGRamsTab: 0
       }
     },
     computed: {
@@ -180,6 +198,9 @@
       },
       orderedTimespans: function () {
         return _.orderBy(this.$store.state.cohorts.timespans, 'attributes.name')
+      },
+      comparisonData: function () {
+        return this.$store.state.cohorts.comparisonData
       }
     },
     created () {
