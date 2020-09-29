@@ -1,20 +1,24 @@
 import CohortsProxy from './../../proxies/CohortsProxy'
 import TimespansProxy from './../../proxies/TimespansProxy'
+import CohortsComparisonsProxy from './../../proxies/CohortsComparisonsProxy'
+import _ from 'lodash'
 
 let cohortsProxy = new CohortsProxy()
 let timespansProxy = new TimespansProxy()
+let cohortsComparisonsProxy = new CohortsComparisonsProxy()
 
 // initial state
 const state = {
   cohorts: [],
-  aggregatedCohort: [],
   activeCohort: false,
   timespans: [],
   cohort_a: false,
   cohort_b: false,
   timespan_a: false,
   timespan_b: false,
-  comparisonData: false
+  comparisonData: false,
+  cohortsComparisons: [],
+  processedCohortsComparisons: []
 }
 
 // getters
@@ -36,13 +40,12 @@ const actions = {
         context.commit('setTimespans', response.data)
       })
   },
-  loadAggregatedCohort (context, ids) {
-    cohortsProxy
-      .aggregated({
-        ids: ids
-      })
+  loadCohortComparisons (context) {
+    cohortsComparisonsProxy
+      .all()
       .then((response) => {
-        context.commit('setAggregatedCohort', response)
+        context.commit('setCohortsComparisonsData', response.data)
+        context.dispatch('processCohortsComparisons')
       })
   },
   loadCohort (context, id) {
@@ -52,7 +55,7 @@ const actions = {
         context.commit('setActiveCohort', response)
       })
   },
-  reloadComparision (context) {
+  reloadComparison (context) {
     cohortsProxy
       .comparison({
         cohort_a_id: state.cohort_a,
@@ -63,6 +66,22 @@ const actions = {
       .then((response) => {
         context.commit('setComparisonData', response.data)
       })
+  },
+  processCohortsComparisons (context) {
+    let processed = []
+
+    _.each(state.cohortsComparisons, (cohortsComparison) => {
+      processed.push(
+        [
+          cohortsComparison.attributes.cohort_a_id,
+          cohortsComparison.attributes.cohort_b_id,
+          cohortsComparison.attributes.timespan_a_id,
+          cohortsComparison.attributes.timespan_b_id
+        ]
+      )
+    })
+
+    context.commit('setProcessedCohortsComparisons', processed)
   }
 }
 
@@ -86,14 +105,17 @@ const mutations = {
   setTimespanB (state, timespan) {
     state.timespan_b = timespan
   },
-  setAggregatedCohort (state, cohort) {
-    state.aggregatedCohort = cohort
-  },
   setActiveCohort (state, cohort) {
     state.activeCohort = cohort
   },
   setComparisonData (state, data) {
     state.comparisonData = data
+  },
+  setCohortsComparisonsData (state, data) {
+    state.cohortsComparisons = data
+  },
+  setProcessedCohortsComparisons (state, data) {
+    state.processedCohortsComparisons = data
   }
 }
 

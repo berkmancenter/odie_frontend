@@ -12,12 +12,6 @@
       </div>
     </div>
 
-    <nav class="navbar main-navbar noselect" role="navigation" aria-label="main navigation">
-      <div class="container">
-        <MainMenu />
-      </div>
-    </nav>
-
     <section class="section">
       <div class="content">
         <transition name="fade">
@@ -30,8 +24,6 @@
       <div class="content has-text-centered noselect">
         <img class="footer-logo" src="@/assets/images/logo_berkman.svg">
         <div>{{ new Date().getFullYear() }} @ Berkman Klein Center</div>
-        <div>Built: {{ build_date }}</div>
-        <div>Version: {{ build_version }}</div>
       </div>
     </footer>
   </div>

@@ -4,14 +4,20 @@
       <h1 class="has-text-centered">Compare</h1>
 
       <div class="columns">
+        <div class="column has-text-centered">
+          <b-button type="is-primary" @click="resetFilters()">Reset Filters</b-button>
+        </div>
+      </div>
+
+      <div class="columns">
         <div class="column is-two-fifths has-text-centered">
           <b-select class="is-pulled-right"
                     placeholder="Select a cohort"
                     v-model="cohort_a"
-                    :loading="orderedCohorts.length === 0"
-                    @input="reloadComparision">
+                    :loading="$store.state.cohorts.cohorts.length === 0"
+                    @input="reloadComparison">
             <option
-                v-for="cohort in orderedCohorts"
+                v-for="cohort in orderedCohortsA"
                 :value="cohort.id"
                 :key="cohort.id">
                 {{ cohort.attributes.name }}
@@ -25,10 +31,10 @@
           <b-select class="is-pulled-left"
                     placeholder="Select a cohort"
                     v-model="cohort_b"
-                    :loading="orderedCohorts.length === 0"
-                    @input="reloadComparision">
+                    :loading="$store.state.cohorts.cohorts.length === 0"
+                    @input="reloadComparison">
             <option
-                v-for="cohort in orderedCohorts"
+                v-for="cohort in orderedCohortsB"
                 :value="cohort.id"
                 :key="cohort.id">
                 {{ cohort.attributes.name }}
@@ -53,10 +59,10 @@
             <b-select class="is-pulled-right"
                       placeholder="Select a timespan"
                       v-model="timespan_a"
-                      :loading="orderedTimespans.length === 0"
-                      @input="reloadComparision">
+                      :loading="$store.state.cohorts.timespans.length === 0"
+                      @input="reloadComparison">
               <option
-                  v-for="timespan in orderedTimespans"
+                  v-for="timespan in orderedTimespansA"
                   :value="timespan.id"
                   :key="timespan.id">
                   {{ timespan.attributes.name }}
@@ -69,10 +75,10 @@
           <b-select class="is-pulled-left"
                     placeholder="Select a timespan"
                     v-model="timespan_b"
-                    :loading="orderedTimespans.length === 0"
-                    @input="reloadComparision">
+                    :loading="$store.state.cohorts.timespans.length === 0"
+                    @input="reloadComparison">
             <option
-                v-for="timespan in orderedTimespans"
+                v-for="timespan in orderedTimespansB"
                 :value="timespan.id"
                 :key="timespan.id">
                 {{ timespan.attributes.name }}
@@ -185,19 +191,62 @@
         cohort_b: false,
         timespan_a: false,
         timespan_b: false,
+        available_cohort_a: [],
+        available_cohort_b: [],
+        available_timespan_a: [],
+        available_timespan_b: [],
         activeAGRamsTab: 0,
         activeBGRamsTab: 0
       }
     },
     computed: {
-      cohortsStore () {
-        return this.$store.state.cohorts.cohorts
+      orderedCohortsA: function () {
+        if (!this.cohort_a && !this.cohort_b && !this.timespan_a && !this.timespan_b) {
+          return _.orderBy(this.$store.state.cohorts.cohorts, 'attributes.name')
+        }
+
+        return _.orderBy(_.filter(
+          this.$store.state.cohorts.cohorts,
+          (cohort) => {
+            return this.available_cohort_a.indexOf(_.toInteger(cohort.id)) !== -1
+          }
+        ), 'attributes.name')
       },
-      orderedCohorts: function () {
-        return _.orderBy(this.$store.state.cohorts.cohorts, 'attributes.name')
+      orderedCohortsB: function () {
+        if (!this.cohort_a && !this.cohort_b && !this.timespan_a && !this.timespan_b) {
+          return _.orderBy(this.$store.state.cohorts.cohorts, 'attributes.name')
+        }
+
+        return _.orderBy(_.filter(
+          this.$store.state.cohorts.cohorts,
+          (cohort) => {
+            return this.available_cohort_b.indexOf(_.toInteger(cohort.id)) !== -1
+          }
+        ), 'attributes.name')
       },
-      orderedTimespans: function () {
-        return _.orderBy(this.$store.state.cohorts.timespans, 'attributes.name')
+      orderedTimespansA: function () {
+        if (!this.cohort_a && !this.cohort_b && !this.timespan_a && !this.timespan_b) {
+          return _.orderBy(this.$store.state.cohorts.timespans, 'attributes.name')
+        }
+
+        return _.orderBy(_.filter(
+          this.$store.state.cohorts.timespans,
+          (timespan) => {
+            return this.available_timespan_a.indexOf(_.toInteger(timespan.id)) !== -1
+          }
+        ), 'attributes.name')
+      },
+      orderedTimespansB: function () {
+        if (!this.cohort_a && !this.cohort_b && !this.timespan_a && !this.timespan_b) {
+          return _.orderBy(this.$store.state.cohorts.timespans, 'attributes.name')
+        }
+
+        return _.orderBy(_.filter(
+          this.$store.state.cohorts.timespans,
+          (timespan) => {
+            return this.available_timespan_b.indexOf(_.toInteger(timespan.id)) !== -1
+          }
+        ), 'attributes.name')
       },
       comparisonData: function () {
         return this.$store.state.cohorts.comparisonData
@@ -206,6 +255,7 @@
     created () {
       this.$store.dispatch('cohorts/loadCohorts')
       this.$store.dispatch('cohorts/loadTimespans')
+      this.$store.dispatch('cohorts/loadCohortComparisons')
     },
     methods: {
       cohortData (cohortId) {
@@ -213,14 +263,78 @@
           return cohort.id === cohortId
         })
       },
-      reloadComparision () {
+      reloadComparison () {
         if (this.cohort_a && this.cohort_b && this.timespan_a && this.timespan_b) {
           this.$store.commit('cohorts/setCohortA', this.cohort_a)
           this.$store.commit('cohorts/setCohortB', this.cohort_b)
           this.$store.commit('cohorts/setTimespanA', this.timespan_a)
           this.$store.commit('cohorts/setTimespanB', this.timespan_b)
-          this.$store.dispatch('cohorts/reloadComparision')
+          this.$store.dispatch('cohorts/reloadComparison')
         }
+
+        this.findAvailableOptions()
+      },
+      findAvailableOptions () {
+        this.allowedCombinations = this.$store.state.cohorts.processedCohortsComparisons
+        let intCohortA = _.toInteger(this.cohort_a)
+        let intCohortB = _.toInteger(this.cohort_b)
+        let intTimespanA = _.toInteger(this.timespan_a)
+        let intTimespanB = _.toInteger(this.timespan_b)
+
+        if (intCohortA) {
+          this.allowedCombinations = _.filter(
+            this.allowedCombinations,
+            (allowedCombination) => {
+              return allowedCombination[0] === intCohortA
+            }
+          )
+        }
+
+        if (intCohortB) {
+          this.allowedCombinations = _.filter(
+            this.allowedCombinations,
+            (allowedCombination) => {
+              return allowedCombination[1] === intCohortB
+            }
+          )
+        }
+
+        if (intTimespanA) {
+          this.allowedCombinations = _.filter(
+            this.allowedCombinations,
+            (allowedCombination) => {
+              return allowedCombination[2] === intTimespanA
+            }
+          )
+        }
+
+        if (intTimespanB) {
+          this.allowedCombinations = _.filter(
+            this.allowedCombinations,
+            (allowedCombination) => {
+              return allowedCombination[3] === intTimespanB
+            }
+          )
+        }
+
+        this.available_cohort_a = _.map(this.allowedCombinations, (allowedCombination) => {
+          return allowedCombination[0]
+        })
+        this.available_cohort_b = _.map(this.allowedCombinations, (allowedCombination) => {
+          return allowedCombination[1]
+        })
+        this.available_timespan_a = _.map(this.allowedCombinations, (allowedCombination) => {
+          return allowedCombination[2]
+        })
+        this.available_timespan_b = _.map(this.allowedCombinations, (allowedCombination) => {
+          return allowedCombination[3]
+        })
+      },
+      resetFilters () {
+        this.cohort_a = false
+        this.cohort_b = false
+        this.timespan_a = false
+        this.timespan_b = false
       }
     }
   }
