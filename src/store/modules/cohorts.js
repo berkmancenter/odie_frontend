@@ -56,6 +56,8 @@ const actions = {
       })
   },
   reloadComparison (context) {
+    context.commit('setComparisonData', false)
+
     cohortsProxy
       .comparison({
         cohort_a_id: state.cohort_a,

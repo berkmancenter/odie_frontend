@@ -14,7 +14,7 @@
           <b-select class="is-pulled-right"
                     placeholder="Select a cohort"
                     v-model="cohort_a"
-                    :loading="$store.state.cohorts.cohorts.length === 0"
+                    :loading="loadingOptions"
                     @input="reloadComparison">
             <option
                 v-for="cohort in orderedCohortsA"
@@ -31,7 +31,7 @@
           <b-select class="is-pulled-left"
                     placeholder="Select a cohort"
                     v-model="cohort_b"
-                    :loading="$store.state.cohorts.cohorts.length === 0"
+                    :loading="loadingOptions"
                     @input="reloadComparison">
             <option
                 v-for="cohort in orderedCohortsB"
@@ -59,7 +59,7 @@
             <b-select class="is-pulled-right"
                       placeholder="Select a timespan"
                       v-model="timespan_a"
-                      :loading="$store.state.cohorts.timespans.length === 0"
+                      :loading="loadingOptions"
                       @input="reloadComparison">
               <option
                   v-for="timespan in orderedTimespansA"
@@ -75,7 +75,7 @@
           <b-select class="is-pulled-left"
                     placeholder="Select a timespan"
                     v-model="timespan_b"
-                    :loading="$store.state.cohorts.timespans.length === 0"
+                    :loading="loadingOptions"
                     @input="reloadComparison">
             <option
                 v-for="timespan in orderedTimespansB"
@@ -142,7 +142,7 @@
 
         <div class="columns">
           <div class="column is-two-fifths has-text-right compare-view-phrases-a">
-            <b-tabs v-model="activeAGRamsTab" position="is-right" multiline="true">
+            <b-tabs v-model="activeAGRamsTab" position="is-right" :multiline="true">
               <b-tab-item label="Most Characteristic">
                 <div v-for="phrase in comparisonData.attributes.results.f1_scores.most_characteristic_a">{{ phrase }}</div>
               </b-tab-item>
@@ -159,7 +159,7 @@
           </div>
           <div class="column has-text-centered"></div>
           <div class="column is-two-fifths has-text-left compare-view-phrases-b">
-            <b-tabs v-model="activeBGRamsTab" position="is-left" multiline="true">
+            <b-tabs v-model="activeBGRamsTab" position="is-left" :multiline="true">
               <b-tab-item label="Most Characteristic">
                 <div v-for="phrase in comparisonData.attributes.results.f1_scores.most_characteristic_b">{{ phrase }}</div>
               </b-tab-item>
@@ -256,6 +256,11 @@
       },
       comparisonData: function () {
         return this.$store.state.cohorts.comparisonData
+      },
+      loadingOptions: function () {
+        return this.$store.state.cohorts.cohorts.length === 0 ||
+               this.$store.state.cohorts.processedCohortsComparisons.length === 0 ||
+               this.$store.state.cohorts.timespans.length === 0
       }
     },
     created () {
