@@ -1,3 +1,24 @@
 .compare-view {
-  
+  .b-tabs {
+    ul {
+      margin: 0;
+      flex-direction: column;
+    }
+  }
+
+  .compare-view-phrases-a {
+    .b-tabs {
+      ul {
+        align-items: flex-end;
+      }
+    }
+  }
+
+  .compare-view-phrases-b {
+    .b-tabs {
+      ul {
+        align-items: flex-start;
+      }
+    }
+  }
 }

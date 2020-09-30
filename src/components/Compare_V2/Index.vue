@@ -141,8 +141,11 @@
         </div>
 
         <div class="columns">
-          <div class="column is-two-fifths has-text-right">
-            <b-tabs v-model="activeAGRamsTab" position="is-right">
+          <div class="column is-two-fifths has-text-right compare-view-phrases-a">
+            <b-tabs v-model="activeAGRamsTab" position="is-right" multiline="true">
+              <b-tab-item label="Most Characteristic">
+                <div v-for="phrase in comparisonData.attributes.results.f1_scores.most_characteristic_a">{{ phrase }}</div>
+              </b-tab-item>
               <b-tab-item label="Bigrams">
                 <div v-for="(number, phrase) in comparisonData.attributes.results.summary_a.top_bigrams">{{ phrase }}</div>
               </b-tab-item>
@@ -155,8 +158,11 @@
             </b-tabs>
           </div>
           <div class="column has-text-centered"></div>
-          <div class="column is-two-fifths has-text-left">
-            <b-tabs v-model="activeBGRamsTab" position="is-left">
+          <div class="column is-two-fifths has-text-left compare-view-phrases-b">
+            <b-tabs v-model="activeBGRamsTab" position="is-left" multiline="true">
+              <b-tab-item label="Most Characteristic">
+                <div v-for="phrase in comparisonData.attributes.results.f1_scores.most_characteristic_b">{{ phrase }}</div>
+              </b-tab-item>
               <b-tab-item label="Bigrams">
                 <div v-for="(number, phrase) in comparisonData.attributes.results.summary_b.top_bigrams">{{ phrase }}</div>
               </b-tab-item>
