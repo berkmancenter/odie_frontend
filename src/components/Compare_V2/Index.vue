@@ -186,17 +186,16 @@
 
 <script>
   import _ from 'lodash'
+  import router from '../../router'
 
   export default {
     name: 'compare-v2-index',
-    props: ['media_sources'],
     data () {
       return {
-        cohortsValue: [],
-        cohort_a: false,
-        cohort_b: false,
-        timespan_a: false,
-        timespan_b: false,
+        cohort_a: undefined,
+        cohort_b: undefined,
+        timespan_a: undefined,
+        timespan_b: undefined,
         available_cohort_a: [],
         available_cohort_b: [],
         available_timespan_a: [],
@@ -207,7 +206,7 @@
     },
     computed: {
       orderedCohortsA: function () {
-        if (!this.cohort_a && !this.cohort_b && !this.timespan_a && !this.timespan_b) {
+        if (this.noOptionSelected()) {
           return _.orderBy(this.$store.state.cohorts.cohorts, 'attributes.name')
         }
 
@@ -219,7 +218,7 @@
         ), 'attributes.name')
       },
       orderedCohortsB: function () {
-        if (!this.cohort_a && !this.cohort_b && !this.timespan_a && !this.timespan_b) {
+        if (this.noOptionSelected()) {
           return _.orderBy(this.$store.state.cohorts.cohorts, 'attributes.name')
         }
 
@@ -231,7 +230,7 @@
         ), 'attributes.name')
       },
       orderedTimespansA: function () {
-        if (!this.cohort_a && !this.cohort_b && !this.timespan_a && !this.timespan_b) {
+        if (this.noOptionSelected()) {
           return _.orderBy(this.$store.state.cohorts.timespans, 'attributes.name')
         }
 
@@ -243,7 +242,7 @@
         ), 'attributes.name')
       },
       orderedTimespansB: function () {
-        if (!this.cohort_a && !this.cohort_b && !this.timespan_a && !this.timespan_b) {
+        if (this.noOptionSelected()) {
           return _.orderBy(this.$store.state.cohorts.timespans, 'attributes.name')
         }
 
@@ -264,9 +263,21 @@
       }
     },
     created () {
-      this.$store.dispatch('cohorts/loadCohorts')
-      this.$store.dispatch('cohorts/loadTimespans')
-      this.$store.dispatch('cohorts/loadCohortComparisons')
+      let loadedCohorts = this.$store.dispatch('cohorts/loadCohorts')
+      let loadedTimespans = this.$store.dispatch('cohorts/loadTimespans')
+      let loadedComparisions = this.$store.dispatch('cohorts/loadCohortComparisons')
+
+      Promise.all([loadedCohorts, loadedTimespans, loadedComparisions]).then(() => {
+        if (router.currentRoute.params.state) {
+          let stateData = JSON.parse(atob(router.currentRoute.params.state))
+          this.cohort_a = stateData.cohort_a
+          this.cohort_b = stateData.cohort_b
+          this.timespan_a = stateData.timespan_a
+          this.timespan_b = stateData.timespan_b
+        }
+
+        this.reloadComparison()
+      })
     },
     methods: {
       cohortData (cohortId) {
@@ -275,6 +286,25 @@
         })
       },
       reloadComparison () {
+        if (this.noOptionSelected()) {
+          router.push({
+            path: `/compare`
+          })
+        } else {
+          let encodedData = btoa(JSON.stringify({
+            cohort_a: this.cohort_a,
+            cohort_b: this.cohort_b,
+            timespan_a: this.timespan_a,
+            timespan_b: this.timespan_b
+          }))
+
+          if (encodedData !== router.currentRoute.params.state) {
+            router.push({
+              path: `/compare/${encodedData}`
+            })
+          }
+        }
+
         if (this.cohort_a && this.cohort_b && this.timespan_a && this.timespan_b) {
           this.$store.commit('cohorts/setCohortA', this.cohort_a)
           this.$store.commit('cohorts/setCohortB', this.cohort_b)
@@ -342,10 +372,14 @@
         })
       },
       resetFilters () {
-        this.cohort_a = false
-        this.cohort_b = false
-        this.timespan_a = false
-        this.timespan_b = false
+        this.cohort_a = undefined
+        this.cohort_b = undefined
+        this.timespan_a = undefined
+        this.timespan_b = undefined
+        this.reloadComparison()
+      },
+      noOptionSelected () {
+        return !this.cohort_a && !this.cohort_b && !this.timespan_a && !this.timespan_b
       }
     }
   }

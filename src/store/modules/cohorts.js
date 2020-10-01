@@ -27,32 +27,25 @@ const getters = {}
 // actions
 const actions = {
   loadCohorts (context) {
-    cohortsProxy
+    return cohortsProxy
       .all()
       .then((response) => {
         context.commit('setCohorts', response.data)
       })
   },
   loadTimespans (context) {
-    timespansProxy
+    return timespansProxy
       .all()
       .then((response) => {
         context.commit('setTimespans', response.data)
       })
   },
   loadCohortComparisons (context) {
-    cohortsComparisonsProxy
+    return cohortsComparisonsProxy
       .all()
       .then((response) => {
         context.commit('setCohortsComparisonsData', response.data)
         context.dispatch('processCohortsComparisons')
-      })
-  },
-  loadCohort (context, id) {
-    cohortsProxy
-      .find(id)
-      .then((response) => {
-        context.commit('setActiveCohort', response)
       })
   },
   reloadComparison (context) {

@@ -30,7 +30,7 @@ export default new Router({
           redirect: 'compare'
         },
         {
-          path: 'compare',
+          path: 'compare/:state?',
           name: 'compare.index',
           meta: {
             title: 'ODIE - Online Discourse Insight Explorer - Compare Cohorts',
