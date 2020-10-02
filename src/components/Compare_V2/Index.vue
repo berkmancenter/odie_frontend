@@ -15,6 +15,7 @@
                     placeholder="Select a cohort"
                     v-model="cohort_a"
                     :loading="loadingOptions"
+                    :disabled="loadingOptions"
                     @input="reloadComparison">
             <option
                 v-for="cohort in orderedCohortsA"
@@ -32,6 +33,7 @@
                     placeholder="Select a cohort"
                     v-model="cohort_b"
                     :loading="loadingOptions"
+                    :disabled="loadingOptions"
                     @input="reloadComparison">
             <option
                 v-for="cohort in orderedCohortsB"
@@ -60,6 +62,7 @@
                       placeholder="Select a timespan"
                       v-model="timespan_a"
                       :loading="loadingOptions"
+                      :disabled="loadingOptions"
                       @input="reloadComparison">
               <option
                   v-for="timespan in orderedTimespansA"
@@ -76,6 +79,7 @@
                     placeholder="Select a timespan"
                     v-model="timespan_b"
                     :loading="loadingOptions"
+                    :disabled="loadingOptions"
                     @input="reloadComparison">
             <option
                 v-for="timespan in orderedTimespansB"
