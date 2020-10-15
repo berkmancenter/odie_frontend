@@ -51,14 +51,49 @@ const actions = {
   reloadComparison (context) {
     context.commit('setComparisonData', false)
 
+    let matched = _.find(state.cohortsComparisons, (cohortsComparison) => {
+      return cohortsComparison.attributes.cohort_a_id === _.toInteger(state.cohort_a) &&
+             cohortsComparison.attributes.cohort_b_id === _.toInteger(state.cohort_b) &&
+             cohortsComparison.attributes.timespan_a_id === _.toInteger(state.timespan_a) &&
+             cohortsComparison.attributes.timespan_b_id === _.toInteger(state.timespan_b)
+    })
+
+    let cohortAId = state.cohort_a
+    let cohortBId = state.cohort_b
+    let timespanAId = state.timespan_a
+    let timespanBId = state.timespan_b
+    if (!matched) {
+      // Reverse call attributes
+      cohortAId = state.cohort_b
+      cohortBId = state.cohort_a
+      timespanAId = state.timespan_b
+      timespanBId = state.timespan_a
+    }
+
     cohortsProxy
       .comparison({
-        cohort_a_id: state.cohort_a,
-        cohort_b_id: state.cohort_b,
-        timespan_a_id: state.timespan_a,
-        timespan_b_id: state.timespan_b
+        cohort_a_id: cohortAId,
+        cohort_b_id: cohortBId,
+        timespan_a_id: timespanAId,
+        timespan_b_id: timespanBId
       })
       .then((response) => {
+        if (!matched) {
+          // Reverse results
+          let tmpBCohortId = response.data.attributes.cohort_b_id
+          let tmpBTimespanId = response.data.attributes.timespan_b_id
+          let tmpBSummary = response.data.attributes.results.summary_b
+          let tmpBScores = response.data.attributes.results.f1_scores.most_characteristic_b
+          response.data.attributes.cohort_b_id = response.data.attributes.cohort_a_id
+          response.data.attributes.timespan_b_id = response.data.attributes.timespan_a_id
+          response.data.attributes.results.summary_b = response.data.attributes.results.summary_a
+          response.data.attributes.results.f1_scores.most_characteristic_b = response.data.attributes.results.f1_scores.most_characteristic_a
+          response.data.attributes.cohort_a_id = tmpBCohortId
+          response.data.attributes.timespan_a_id = tmpBTimespanId
+          response.data.attributes.results.summary_a = tmpBSummary
+          response.data.attributes.results.f1_scores.most_characteristic_a = tmpBScores
+        }
+
         context.commit('setComparisonData', response.data)
       })
   },
@@ -72,6 +107,12 @@ const actions = {
           cohortsComparison.attributes.cohort_b_id,
           cohortsComparison.attributes.timespan_a_id,
           cohortsComparison.attributes.timespan_b_id
+        ],
+        [
+          cohortsComparison.attributes.cohort_b_id,
+          cohortsComparison.attributes.cohort_a_id,
+          cohortsComparison.attributes.timespan_b_id,
+          cohortsComparison.attributes.timespan_a_id
         ]
       )
     })

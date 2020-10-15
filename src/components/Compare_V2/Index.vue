@@ -294,6 +294,7 @@
           router.push({
             path: `/compare`
           })
+          .catch(() => {})
         } else {
           let encodedData = btoa(JSON.stringify({
             cohort_a: this.cohort_a,
@@ -306,6 +307,7 @@
             router.push({
               path: `/compare/${encodedData}`
             })
+            .catch(() => {})
           }
         }
 
