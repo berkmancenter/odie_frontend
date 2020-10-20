@@ -148,16 +148,32 @@
           <div class="column is-two-fifths has-text-right compare-view-phrases-a">
             <b-tabs v-model="activeAGRamsTab" position="is-right" :multiline="true">
               <b-tab-item label="Most Characteristic">
-                <div v-for="phrase in comparisonData.attributes.results.f1_scores.most_characteristic_a">{{ phrase }}</div>
-              </b-tab-item>
-              <b-tab-item label="Bigrams">
-                <div v-for="(number, phrase) in comparisonData.attributes.results.summary_a.top_bigrams">{{ phrase }}</div>
+                <div v-for="phrase in comparisonData.attributes.results.f1_scores.most_characteristic_a">
+                  <a :href="phraseUrl(phrase, timespan_a)" target="_blank">
+                    {{ phrase }}
+                  </a>
+                </div>
               </b-tab-item>
               <b-tab-item label="Trigrams">
-                <div v-for="(number, phrase) in comparisonData.attributes.results.summary_a.top_trigrams">{{ phrase }}</div>
+                <div v-for="(number, phrase) in comparisonData.attributes.results.summary_a.top_trigrams">
+                  <a :href="phraseUrl(phrase, timespan_a)" target="_blank">
+                    {{ phrase }}
+                  </a>
+                </div>
+              </b-tab-item>
+              <b-tab-item label="Bigrams">
+                <div v-for="(number, phrase) in comparisonData.attributes.results.summary_a.top_bigrams">
+                  <a :href="phraseUrl(phrase, timespan_a)" target="_blank">
+                    {{ phrase }}
+                  </a>
+                </div>
               </b-tab-item>
               <b-tab-item label="Unigrams">
-                <div v-for="(number, phrase) in comparisonData.attributes.results.summary_a.top_unigrams">{{ phrase }}</div>
+                <div v-for="(number, phrase) in comparisonData.attributes.results.summary_a.top_unigrams">
+                  <a :href="phraseUrl(phrase, timespan_a)" target="_blank">
+                    {{ phrase }}
+                  </a>
+                </div>
               </b-tab-item>
             </b-tabs>
           </div>
@@ -165,16 +181,32 @@
           <div class="column is-two-fifths has-text-left compare-view-phrases-b">
             <b-tabs v-model="activeBGRamsTab" position="is-left" :multiline="true">
               <b-tab-item label="Most Characteristic">
-                <div v-for="phrase in comparisonData.attributes.results.f1_scores.most_characteristic_b">{{ phrase }}</div>
-              </b-tab-item>
-              <b-tab-item label="Bigrams">
-                <div v-for="(number, phrase) in comparisonData.attributes.results.summary_b.top_bigrams">{{ phrase }}</div>
+                <div v-for="phrase in comparisonData.attributes.results.f1_scores.most_characteristic_b">
+                  <a :href="phraseUrl(phrase, timespan_b)" target="_blank">
+                    {{ phrase }}
+                  </a>
+                </div>
               </b-tab-item>
               <b-tab-item label="Trigrams">
-                <div v-for="(number, phrase) in comparisonData.attributes.results.summary_b.top_trigrams">{{ phrase }}</div>
+                <div v-for="(number, phrase) in comparisonData.attributes.results.summary_b.top_trigrams">
+                  <a :href="phraseUrl(phrase, timespan_b)" target="_blank">
+                    {{ phrase }}
+                  </a>
+                </div>
+              </b-tab-item>
+              <b-tab-item label="Bigrams">
+                <div v-for="(number, phrase) in comparisonData.attributes.results.summary_b.top_bigrams">
+                  <a :href="phraseUrl(phrase, timespan_b)" target="_blank">
+                    {{ phrase }}
+                  </a>
+                </div>
               </b-tab-item>
               <b-tab-item label="Unigrams">
-                <div v-for="(number, phrase) in comparisonData.attributes.results.summary_b.top_unigrams">{{ phrase }}</div>
+                <div v-for="(number, phrase) in comparisonData.attributes.results.summary_b.top_unigrams">
+                  <a :href="phraseUrl(phrase, timespan_b)" target="_blank">
+                    {{ phrase }}
+                  </a>
+                </div>
               </b-tab-item>
             </b-tabs>
           </div>
@@ -235,7 +267,7 @@
       },
       orderedTimespansA: function () {
         if (this.noOptionSelected()) {
-          return _.orderBy(this.$store.state.cohorts.timespans, 'attributes.name')
+          return _.orderBy(this.$store.state.cohorts.timespans, 'attributes.end', 'desc')
         }
 
         return _.orderBy(_.filter(
@@ -243,11 +275,11 @@
           (timespan) => {
             return this.available_timespan_a.indexOf(_.toInteger(timespan.id)) !== -1
           }
-        ), 'attributes.name')
+        ), 'attributes.end', 'desc')
       },
       orderedTimespansB: function () {
         if (this.noOptionSelected()) {
-          return _.orderBy(this.$store.state.cohorts.timespans, 'attributes.name')
+          return _.orderBy(this.$store.state.cohorts.timespans, 'attributes.end')
         }
 
         return _.orderBy(_.filter(
@@ -255,7 +287,7 @@
           (timespan) => {
             return this.available_timespan_b.indexOf(_.toInteger(timespan.id)) !== -1
           }
-        ), 'attributes.name')
+        ), 'attributes.end')
       },
       comparisonData: function () {
         return this.$store.state.cohorts.comparisonData
@@ -287,6 +319,11 @@
       cohortData (cohortId) {
         return _.find(this.$store.state.cohorts.cohorts, (cohort) => {
           return cohort.id === cohortId
+        })
+      },
+      timespanData (timespanId) {
+        return _.find(this.$store.state.cohorts.timespans, (timespan) => {
+          return timespan.id === timespanId
         })
       },
       reloadComparison () {
@@ -376,6 +413,17 @@
         this.available_timespan_b = _.map(this.allowedCombinations, (allowedCombination) => {
           return allowedCombination[3]
         })
+      },
+      phraseUrl (phrase, timespanId) {
+        let timespan = this.timespanData(timespanId)
+        let end = new Date(timespan.attributes.end)
+        end.setTime(end.getTime() + 1 * (24 * 60 * 60 * 1000))
+        return encodeURI(
+          'https://twitter.com/search?q=' +
+          phrase +
+          ' since:' + timespan.attributes.start.slice(0, 10) +
+          ' until:' + end.toISOString().slice(0, 10)
+        )
       },
       resetFilters () {
         this.cohort_a = undefined
